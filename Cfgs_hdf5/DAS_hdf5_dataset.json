@@ -1,36 +1,39 @@
 {
     "Datasets": {
-        "Seismic": {
-            "Francia": {
-                "path": "Data_Preprocessed/Francia.npy",
-                "type": "npy"
-            },
-            "Nevada": {
-                "path": "Data_Preprocessed/Francia.npy",
-                "type": "npy"
-            },
-            "Reykjanes": {
-                "path": "Data_Preprocessed/Francia.npy",
-                "type": "npy"
-            }
+        "Francia": {
+            "path": "Data_Preprocessed/Francia.npy",
+            "type": "seismic",
+            "format": "npy"
         },
-        "Non-seismic": {
-            "California": {
-                "path": "Data_Preprocessed/Francia.npy",
-                "type": "npy"
-            },
-            "Hydraulic": {
-                "path": "Data_Preprocessed/Francia.npy",
-                "type": "npy"
-            },
-            "Vibroseis": {
-                "path": "Data_Preprocessed/Francia.npy",
-                "type": "npy"
-            },
-            "Shaker": {
-                "path": "Data_Preprocessed/Francia.npy",
-                "type": "npy"
-            }
+        "Nevada": {
+            "path": "Data_Preprocessed/Francia.npy",
+            "type": "seismic",
+            "format": "npy"
+        },
+        "Reykjanes": {
+            "path": "Data_Preprocessed/Francia.npy",
+            "type": "seismic",
+            "format": "npy"
+        },
+        "California": {
+            "path": "Data_Preprocessed/Francia.npy",
+            "type": "nonseismic",
+            "format": "npy"
+        },
+        "Hydraulic": {
+            "path": "Data_Preprocessed/Francia.npy",
+            "type": "nonseismic",
+            "format": "npy"
+        },
+        "Vibroseis": {
+            "path": "Data_Preprocessed/Francia.npy",
+            "type": "nonseismic",
+            "format": "npy"
+        },
+        "Shaker": {
+            "path": "Data_Preprocessed/Francia.npy",
+            "type": "nonseismic",
+            "format": "npy"
         }
     },
     "OutputFile": "Data_HDF5/DAS_test_dataset.hdf5"
