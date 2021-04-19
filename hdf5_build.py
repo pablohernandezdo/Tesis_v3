@@ -2,7 +2,7 @@ import h5py
 import json
 
 
-class H5BUilder:
+class H5Builder:
     """
     Tomar datasets en formato npy y construir un dataset HDF5, guardarlo
     """
