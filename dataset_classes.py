@@ -40,6 +40,13 @@ class Dsets:
         return np.asarray(new_traces)
 
     @staticmethod
+    def save_dataset(traces, savepath, name):
+        if not os.path.exists(os.path.dirname(savepath)):
+            os.makedirs(os.path.dirname(savepath), exist_ok=True)
+
+        np.save(f'{savepath}/{name}', traces)
+
+    @staticmethod
     def normalize(traces):
         norm_traces = []
 
@@ -73,9 +80,10 @@ class Dsets:
 
 
 class DatasetFrancia(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
 
+        self.savepath = savepath
         self.dataset_path = dataset_path
         self.traces = sio.loadmat(self.dataset_path)["StrainFilt"]
         self.fs = 100
@@ -83,14 +91,18 @@ class DatasetFrancia(Dsets):
         self.traces = self.preprocess(self.traces, self.fs)
         self.traces = self.normalize(self.traces)
 
+        if not os.path.exists(f'{self.savepath}/Francia.npy'):
+            self.save_dataset(self.traces, self.savepath, 'Francia')
+
     def prune_traces(self):
         pass
 
 
 class DatasetNevada(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
 
+        self.savepath = savepath
         self.dataset_path = dataset_path
         self.traces, self.fs = self.read_segy(self.dataset_path)
 
@@ -98,6 +110,9 @@ class DatasetNevada(Dsets):
         self.traces = self.preprocess(self.traces, self.fs)
         self.traces = self.padd()
         self.traces = self.normalize(self.traces)
+
+        if not os.path.exists(f'{self.savepath}/Nevada.npy'):
+            self.save_dataset(self.traces, self.savepath, 'Nevada')
 
     def padd(self):
 
@@ -122,16 +137,19 @@ class DatasetNevada(Dsets):
 
 
 class DatasetBelgica(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
+        self.savepath = savepath
         self.dataset_path = dataset_path
 
         # Belgica lo voy a dejar para el final, mucho webeo entremedio
 
 
 class DatasetReykjanes(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
+
+        self.savepath = savepath
         self.dataset_path = dataset_path
         self.fs = 200
         self.n_traces = 2551
@@ -140,6 +158,10 @@ class DatasetReykjanes(Dsets):
         self.traces = self.preprocess(self.traces, self.fs)
         self.traces = self.padd()
         self.traces = self.normalize(self.traces)
+
+        if not os.path.exists(f'{self.savepath}/Reykajnes.npy'):
+            self.save_dataset(self.traces, self.savepath, 'Reykjanes')
+
 
     def padd(self):
         rng = default_rng()
@@ -183,13 +205,14 @@ class DatasetReykjanes(Dsets):
 
 
 class DatasetCalifornia(Dsets):
-    def __init__(self, dataset_paths):
+    def __init__(self, dataset_paths, savepath):
         super().__init__()
 
         if len(dataset_paths) != 4:
             print("Se necesitan 4 archivos!")
 
         else:
+            self.savepath = savepath
             self.dataset_paths = dataset_paths
             self.fs = 1000
             self.d1, self.d2, self.d3, self.d4 = self.dataset_paths
@@ -222,6 +245,9 @@ class DatasetCalifornia(Dsets):
                                      self.traces_d3,
                                      self.traces_d4])
 
+            if not os.path.exists(f'{self.savepath}/California.npy'):
+                self.save_dataset(self.traces, self.savepath, 'California')
+
     @staticmethod
     def trim(traces):
         traces = traces[:, :traces.shape[1] // 6000 * 6000]
@@ -230,8 +256,10 @@ class DatasetCalifornia(Dsets):
 
 
 class DatasetHydraulic(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
+
+        self.savepath = savepath
         self.dataset_path = dataset_path
         self.fs, self.traces = self.read_file()
 
@@ -243,6 +271,11 @@ class DatasetHydraulic(Dsets):
 
         # Normalize
         self.traces = self.normalize(self.traces)
+
+        # Save dataset npy format
+        if not os.path.exists(f'{self.savepath}/Hydraulic.npy'):
+            self.save_dataset(self.traces, self.savepath, 'Hydraulic')
+
 
     def trim(self):
         # Repetir última muestra para que sean 120_000
@@ -258,13 +291,14 @@ class DatasetHydraulic(Dsets):
 
 
 class DatasetVibroseis(Dsets):
-    def __init__(self, dataset_paths):
+    def __init__(self, dataset_paths, savepath):
         super().__init__()
 
         if len(dataset_paths) != 4:
             print("Se necesitan 4 archivos!")
 
         else:
+            self.savepath = savepath
             self.dataset_paths = dataset_paths
             self.fs = 1000
             self.d1, self.d2, self.d3, self.d4 = self.dataset_paths
@@ -297,6 +331,10 @@ class DatasetVibroseis(Dsets):
                                      self.traces_d3,
                                      self.traces_d4])
 
+            # Save dataset npy format
+            if not os.path.exists(f'{self.savepath}/Vibroseis.npy'):
+                self.save_dataset(self.traces, self.savepath, 'Vibroseis')
+
     @staticmethod
     def padd(traces):
         rng = default_rng()
@@ -320,8 +358,10 @@ class DatasetVibroseis(Dsets):
 
 
 class DatasetShaker(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
+
+        self.savepath = savepath
         self.dataset_path = dataset_path
 
         with segyio.open(self.dataset_path, ignore_geometry=True) as segy:
@@ -339,6 +379,11 @@ class DatasetShaker(Dsets):
         # Normalize
         self.traces = self.normalize(self.traces)
 
+        # Save dataset npy format
+        if not os.path.exists(f'{self.savepath}/Shaker.npy'):
+            self.save_dataset(self.traces, self.savepath, 'Shaker')
+
+
     def trim(self):
         traces = self.traces[:, :self.traces.shape[1] // 6000 * 6000]
         traces = traces.reshape(-1, 6000)
@@ -346,8 +391,10 @@ class DatasetShaker(Dsets):
 
 
 class DatasetCoompana(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
+
+        self.savepath = savepath
         self.dataset_path = dataset_path
         self.fs = 4000
 
@@ -395,6 +442,11 @@ class DatasetCoompana(Dsets):
         # normalize
         self.traces = self.normalize(self.traces)
 
+        # Save dataset npy format
+        if not os.path.exists(f'{self.savepath}/Coompana.npy'):
+            self.save_dataset(self.traces, self.savepath, 'Coompana')
+
+
     def padd(self):
 
         rng = default_rng()
@@ -437,8 +489,10 @@ class DatasetCoompana(Dsets):
 
 
 class DatasetLesser(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
+
+        self.savepath = savepath
         self.dataset_path = dataset_path
         self.fs = 250
 
@@ -468,10 +522,16 @@ class DatasetLesser(Dsets):
         # Normalize
         self.traces = self.normalize(self.traces)
 
+        # Save dataset npy format
+        if not os.path.exists(f'{self.savepath}/Lesser.npy'):
+            self.save_dataset(self.traces, self.savepath, 'Lesser')
+
 
 class DatasetNCAirgun(Dsets):
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, savepath):
         super().__init__()
+
+        self.savepath = savepath
         self.dataset_path = dataset_path
         self.fs = 100
 
@@ -489,4 +549,8 @@ class DatasetNCAirgun(Dsets):
 
         # Normalize
         self.traces = self.normalize(self.traces)
+
+        # Save dataset npy format
+        if not os.path.exists(f'{self.savepath}/NCAirgun.npy'):
+            self.save_dataset(self.traces, self.savepath, 'NCAirgun')
 
