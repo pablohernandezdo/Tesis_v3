@@ -85,12 +85,18 @@ class DatasetFrancia(Dsets):
 
         self.savepath = savepath
         self.dataset_path = dataset_path
+
+        print(f"Reading dataset from path: {self.dataset_path}")
         self.traces = sio.loadmat(self.dataset_path)["StrainFilt"]
         self.fs = 100
 
+        print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
+
+        print("Normalizing dataset")
         self.traces = self.normalize(self.traces)
 
+        print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Francia.npy'):
             self.save_dataset(self.traces, self.savepath, 'Francia')
 
@@ -104,13 +110,20 @@ class DatasetNevada(Dsets):
 
         self.savepath = savepath
         self.dataset_path = dataset_path
+
+        print(f"Reading dataset from path: {self.dataset_path}")
         self.traces, self.fs = self.read_segy(self.dataset_path)
 
-        # Se muere mi pc si preproceso el dataset
+        print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
+
+        print("Padding traces")
         self.traces = self.padd()
+
+        print("Normalizing dataset")
         self.traces = self.normalize(self.traces)
 
+        print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Nevada.npy'):
             self.save_dataset(self.traces, self.savepath, 'Nevada')
 
@@ -153,15 +166,22 @@ class DatasetReykjanes(Dsets):
         self.dataset_path = dataset_path
         self.fs = 200
         self.n_traces = 2551
+
+        print(f"Reading dataset from path: {self.dataset_path}")
         self.header, self.traces = self.read_ascii()
 
+        print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
+
+        print("Padding traces")
         self.traces = self.padd()
+
+        print("Normalizing dataset")
         self.traces = self.normalize(self.traces)
 
+        print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Reykajnes.npy'):
             self.save_dataset(self.traces, self.savepath, 'Reykjanes')
-
 
     def padd(self):
         rng = default_rng()
@@ -216,35 +236,38 @@ class DatasetCalifornia(Dsets):
             self.dataset_paths = dataset_paths
             self.fs = 1000
             self.d1, self.d2, self.d3, self.d4 = self.dataset_paths
+
+            print(f"Reading datasets from path {os.path.dirname(self.d1)}")
             self.traces_d1 = sio.loadmat(self.d1)['singdecmatrix'].T
             self.traces_d2 = sio.loadmat(self.d2)['singdecmatrix'].T
             self.traces_d3 = sio.loadmat(self.d3)['singdecmatrix'].T
             self.traces_d4 = sio.loadmat(self.d4)['singdecmatrix'].T
 
-            # Preprocess datasets
+            print(f"Preprocessing datasets")
             self.traces_d1 = self.preprocess(self.traces_d1, self.fs)
             self.traces_d2 = self.preprocess(self.traces_d2, self.fs)
             self.traces_d3 = self.preprocess(self.traces_d3, self.fs)
             self.traces_d4 = self.preprocess(self.traces_d4, self.fs)
 
-            # Trim
+            print(f"Reordering datasets traces")
             self.traces_d1 = self.trim(self.traces_d1)
             self.traces_d2 = self.trim(self.traces_d2)
             self.traces_d3 = self.trim(self.traces_d3)
             self.traces_d4 = self.trim(self.traces_d4)
 
-            # Normalize
+            print("Normalizing datasets")
             self.traces_d1 = self.normalize(self.traces_d1)
             self.traces_d2 = self.normalize(self.traces_d2)
             self.traces_d3 = self.normalize(self.traces_d3)
             self.traces_d4 = self.normalize(self.traces_d4)
 
-            # Stack
+            print("Stacking datasets")
             self.traces = np.vstack([self.traces_d1,
                                      self.traces_d2,
                                      self.traces_d3,
                                      self.traces_d4])
 
+            print(f"Saving npy format dataset in {self.savepath}")
             if not os.path.exists(f'{self.savepath}/California.npy'):
                 self.save_dataset(self.traces, self.savepath, 'California')
 
@@ -261,21 +284,22 @@ class DatasetHydraulic(Dsets):
 
         self.savepath = savepath
         self.dataset_path = dataset_path
+
+        print(f"Reading dataset from path: {self.dataset_path}")
         self.fs, self.traces = self.read_file()
 
-        # Preprocesar
+        print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
 
-        # Trim
+        print(f"Reordering datasets traces")
         self.traces = self.trim()
 
-        # Normalize
+        print("Normalizing dataset")
         self.traces = self.normalize(self.traces)
 
-        # Save dataset npy format
+        print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Hydraulic.npy'):
             self.save_dataset(self.traces, self.savepath, 'Hydraulic')
-
 
     def trim(self):
         # Repetir última muestra para que sean 120_000
@@ -302,36 +326,38 @@ class DatasetVibroseis(Dsets):
             self.dataset_paths = dataset_paths
             self.fs = 1000
             self.d1, self.d2, self.d3, self.d4 = self.dataset_paths
+
+            print(f"Reading datasets from path {os.path.dirname(self.d1)}")
             self.traces_d1, self.fs = self.read_segy(self.d1)
             self.traces_d2, _ = self.read_segy(self.d2)
             self.traces_d3, _ = self.read_segy(self.d3)
             self.traces_d4, _ = self.read_segy(self.d4)
 
-            # Preprocess datasets
+            print(f"Preprocessing datasets")
             self.traces_d1 = self.preprocess(self.traces_d1, self.fs)
             self.traces_d2 = self.preprocess(self.traces_d2, self.fs)
             self.traces_d3 = self.preprocess(self.traces_d3, self.fs)
             self.traces_d4 = self.preprocess(self.traces_d4, self.fs)
 
-            # Padd
+            print(f"Padding datasets traces")
             self.traces_d1 = self.padd(self.traces_d1)
             self.traces_d2 = self.padd(self.traces_d2)
             self.traces_d3 = self.padd(self.traces_d3)
             self.traces_d4 = self.padd(self.traces_d4)
 
-            # Normalize
+            print("Normalizing datasets")
             self.traces_d1 = self.normalize(self.traces_d1)
             self.traces_d2 = self.normalize(self.traces_d2)
             self.traces_d3 = self.normalize(self.traces_d3)
             self.traces_d4 = self.normalize(self.traces_d4)
 
-            # Stack
+            print("Stacking datasets")
             self.traces = np.vstack([self.traces_d1,
                                      self.traces_d2,
                                      self.traces_d3,
                                      self.traces_d4])
 
-            # Save dataset npy format
+            print(f"Saving npy format dataset in {self.savepath}")
             if not os.path.exists(f'{self.savepath}/Vibroseis.npy'):
                 self.save_dataset(self.traces, self.savepath, 'Vibroseis')
 
@@ -364,25 +390,25 @@ class DatasetShaker(Dsets):
         self.savepath = savepath
         self.dataset_path = dataset_path
 
+        print(f"Reading dataset from path: {self.dataset_path}")
         with segyio.open(self.dataset_path, ignore_geometry=True) as segy:
             segy.mmap()
             self.traces = segyio.tools.collect(segy.trace[:])
 
         self.fs = 200
 
-        # Preprocess traces
+        print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
 
-        # Trim
+        print(f"Reordering datasets traces")
         self.traces = self.trim()
 
-        # Normalize
+        print("Normalizing dataset")
         self.traces = self.normalize(self.traces)
 
-        # Save dataset npy format
+        print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Shaker.npy'):
             self.save_dataset(self.traces, self.savepath, 'Shaker')
-
 
     def trim(self):
         traces = self.traces[:, :self.traces.shape[1] // 6000 * 6000]
@@ -397,6 +423,8 @@ class DatasetCoompana(Dsets):
         self.savepath = savepath
         self.dataset_path = dataset_path
         self.fs = 4000
+
+        print(f"Reading dataset from path: {self.dataset_path}")
 
         seg2reader = seg2.SEG2()
 
@@ -429,23 +457,22 @@ class DatasetCoompana(Dsets):
         self.traces_6k = np.asarray(traces_6k)
         self.traces_8k = np.asarray(traces_8k)
 
-        # Padd 6k, vstack
+        print("Padding 6k sample traces to 8k and stacking")
         self.padd_6k()
         self.traces = np.vstack([self.traces_6k, self.traces_8k])
 
-        # preprocess
+        print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
 
-        # padd
+        print("Padding dataset traces")
         self.traces = self.padd()
 
-        # normalize
+        print("Normalizing dataset")
         self.traces = self.normalize(self.traces)
 
-        # Save dataset npy format
+        print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Coompana.npy'):
             self.save_dataset(self.traces, self.savepath, 'Coompana')
-
 
     def padd(self):
 
@@ -498,6 +525,8 @@ class DatasetLesser(Dsets):
 
         traces = []
 
+        print(f"Reading dataset from path: {self.dataset_path}")
+
         # For every file in the dataset folder
         for dataset in os.listdir(self.dataset_path):
 
@@ -516,13 +545,13 @@ class DatasetLesser(Dsets):
 
         self.traces = np.asarray(traces)
 
-        # Preprocess
+        print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
 
-        # Normalize
+        print("Normalizing dataset")
         self.traces = self.normalize(self.traces)
 
-        # Save dataset npy format
+        print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Lesser.npy'):
             self.save_dataset(self.traces, self.savepath, 'Lesser')
 
@@ -535,6 +564,7 @@ class DatasetNCAirgun(Dsets):
         self.dataset_path = dataset_path
         self.fs = 100
 
+        print(f"Reading dataset from path: {self.dataset_path}")
         data = _read_segy(self.dataset_path)
 
         traces = []
@@ -544,13 +574,13 @@ class DatasetNCAirgun(Dsets):
 
         self.traces = np.array(traces)
 
-        # Preprocess
+        print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
 
-        # Normalize
+        print("Normalizing dataset")
         self.traces = self.normalize(self.traces)
 
-        # Save dataset npy format
+        print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/NCAirgun.npy'):
             self.save_dataset(self.traces, self.savepath, 'NCAirgun')
 
