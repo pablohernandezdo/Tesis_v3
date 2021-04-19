@@ -1,3 +1,4 @@
+import os
 import h5py
 import json
 
@@ -12,8 +13,11 @@ class H5Builder:
         with open(config_file, 'r') as config:
             self.cfg = json.load(config)
 
+        if not os.path.exists(os.path.dirname(self.cfg['OutputFile'])):
+            os.makedirs(os.path.dirname(self.cfg['OutputFile']), exist_ok=True)
+
         # Create hdf5 dataset file
-        self.h5 = h5py.File(self.cfg['output_file'], 'w')
+        self.h5 = h5py.File(self.cfg['OutputFile'], 'w')
 
         # Create seismic and non-seismic groups
         g_earthquake = self.h5.create_group('earthquake/local')
