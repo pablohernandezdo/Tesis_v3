@@ -41,8 +41,8 @@ class Dsets:
 
     @staticmethod
     def save_dataset(traces, savepath, name):
-        if not os.path.exists(os.path.dirname(savepath)):
-            os.makedirs(os.path.dirname(savepath), exist_ok=True)
+        if not os.path.exists(savepath):
+            os.makedirs(savepath, exist_ok=True)
 
         np.save(f'{savepath}/{name}', traces)
 
