@@ -99,8 +99,6 @@ class H5Splitter:
         self.source_seismic_group = self.source_h5["earthquake/local"]
         self.source_nonseismic_group = self.source_h5["non_earthquake/noise"]
 
-        # SHUFFLE
-
         # Numero de trazas sismicas y no sismicas
         self.source_seismic_len = len(self.source_seismic_group)
         self.source_nonseismic_len = len(self.source_nonseismic_group)
@@ -172,18 +170,12 @@ class H5Splitter:
 
         seis_divs = np.floor(seis_divs).astype(np.int32)
 
-        # Trazas que quedan sin grupo se suman al de train
-        seis_diff = self.source_seismic_len - np.sum(seis_divs)
-
         # Non-seismic division
         nonseis_divs = self.source_nonseismic_len * np.array([self.train_ratio,
                                                               self.val_ratio,
                                                               self.test_ratio])
 
         nonseis_divs = np.floor(nonseis_divs).astype(np.int32)
-
-        # Numero de trazas que quedan sin grupo
-        nonseis_diff = self.source_nonseismic_len - np.sum(nonseis_divs)
 
         # Elegir los indices de las trazas sismicas a copiar
         rng = default_rng()
@@ -241,3 +233,97 @@ class H5Splitter:
 
         return train_ids, val_ids, test_ids
 
+
+class H5Merger:
+    """
+    Unir datasets HDF5 en uno solo
+    """
+    def __init__(self, datasets, output):
+
+        assert isinstance(datasets, list), "Datasets should be a list!"
+
+        self.datasets = datasets
+        self.output = output
+
+        self.h5_out = h5py.File(self.output, 'w')
+
+        out_seis_group = self.h5_out.create_group("earthquake/local")
+        out_nonseis_group = self.h5_out.create_group("non_earthquake/noise")
+
+        # Para cada dataset en la lista
+        for dset in self.datasets:
+
+            grp_seis = dset["earthquake/local"]
+            grp_nonseis = dset["non_earthquake/noise"]
+
+            for arr in grp_seis:
+                data = grp_seis[arr]
+                out_seis_group.copy(data, arr)
+
+            for arr in grp_nonseis:
+                data = grp_nonseis[arr]
+                out_nonseis_group.copy(data, arr)
+
+        self.h5_out.close()
+
+
+class H5STEAD:
+    """
+    Crear un dataset HDF5 más pequeño a partir del dataset STEAD
+    """
+
+    def __init__(self, stead_path, faulty_path, out_path, n_seis, n_nonseis):
+        self.stead_path = stead_path
+        self.faulty_path = faulty_path
+        self.out_path = out_path
+        self.n_seis = n_seis
+        self.n_nonseis = n_nonseis
+
+        # Leer dataset STEAD
+        self.stead = h5py.File(self.stead_path, 'r')
+        self.stead_seis_grp = self.stead["earthquake/local"]
+        self.stead_nonseis_grp = self.stead["non_earthquake/noise"]
+        self.stead_seis_len = len(self.stead_seis_grp)
+        self.stead_nonseis_len = len(self.stead_nonseis_grp)
+
+        # Lista de indices de todas las trazas disponibles en el dataset
+        source_seis_ids = list(range(self.stead_seis_len))
+        source_nonseis_ids = list(range(self.stead_nonseis_len))
+
+        # Leer indices de trazas fallidas
+        with open(self.faulty_path, 'r') as f:
+            ln = f.readline()
+            self.faulty_ids = list(map(int, ln.strip().split(',')))
+
+        # Quitar indices de trazas fallidas del total (solo sismicas)
+        source_seis_ids = list(set(source_seis_ids) - set(self.faulty_ids))
+
+        # Seleccionar indices de trazas a copiar
+        rng = default_rng()
+
+        seis_ids_copy = rng.choice(len(source_seis_ids),
+                                   self.n_seis, replace=False)
+
+        nonseis_ids_copy = rng.choice(len(source_nonseis_ids),
+                                      self.n_nonseis, replace=False)
+
+        os.makedirs(os.path.dirname(self.out_path), exist_ok=True)
+
+        # Crear nuevo dataset hdf5
+        with h5py.File(self.out_path, "w") as small_h5:
+
+            out_seis_grp = small_h5.create_group("earthquake/local")
+            out_nonseis_grp = small_h5.create_group("non_earthquake/noise")
+
+            # Copiar las trazas al nuevo dataset
+
+            for i, arr in self.stead_seis_grp:
+                if i in seis_ids_copy:
+                    out_seis_grp.copy(arr, self.stead_seis_grp[arr])
+
+            for i, arr in self.stead_nonseis_grp:
+                if i in nonseis_ids_copy:
+                    out_nonseis_grp.copy(arr, self.stead_nonseis_grp[arr])
+
+        # Cerrar los datasets
+        self.stead.close()
