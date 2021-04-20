@@ -254,16 +254,17 @@ class H5Merger:
         # Para cada dataset en la lista
         for dset in self.datasets:
 
-            grp_seis = dset["earthquake/local"]
-            grp_nonseis = dset["non_earthquake/noise"]
+            with h5py.File(dset, "r") as h5:
+                grp_seis = h5["earthquake/local"]
+                grp_nonseis = h5["non_earthquake/noise"]
 
-            for arr in grp_seis:
-                data = grp_seis[arr]
-                out_seis_group.copy(data, arr)
+                for arr in grp_seis:
+                    data = grp_seis[arr]
+                    out_seis_group.copy(data, arr)
 
-            for arr in grp_nonseis:
-                data = grp_nonseis[arr]
-                out_nonseis_group.copy(data, arr)
+                for arr in grp_nonseis:
+                    data = grp_nonseis[arr]
+                    out_nonseis_group.copy(data, arr)
 
         self.h5_out.close()
 
