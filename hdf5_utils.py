@@ -254,7 +254,12 @@ class H5Merger:
         # Para cada dataset en la lista
         for dset in self.datasets:
 
+            print(f"Merging dataset: {dset}")
+
             with h5py.File(dset, "r") as h5:
+
+                print(f"Dataset keys: {list(h5.keys())}")
+
                 grp_seis = h5["earthquake/local"]
                 grp_nonseis = h5["non_earthquake/noise"]
 
