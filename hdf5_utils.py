@@ -316,7 +316,8 @@ class H5STEAD:
             out_nonseis_grp = small_h5.create_group("non_earthquake/noise")
 
             # Copiar las trazas al nuevo dataset
-
+            print(type(out_seis_grp))
+            
             for i, arr in enumerate(self.stead_seis_grp):
                 if i in seis_ids_copy:
                     out_seis_grp.copy(arr, self.stead_seis_grp[arr])
