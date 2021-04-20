@@ -198,8 +198,13 @@ class H5Splitter:
         # Los ids que quedan son para test
         seismic_test_ids = source_ids
 
+        assert_msg = f"seismic_train_ids: {len(seismic_train_ids)}\n" \
+                     f"seismic_val_ids: {len(seismic_val_ids)}\n" \
+                     f"seismic_test_ids: {len(seismic_test_ids)}\n" \
+                     f"source_ids: {self.source_seismic_len}"
+
         assert len(seismic_train_ids) + len(seismic_val_ids) + len(
-            seismic_test_ids) == self.source_seismic_len
+            seismic_test_ids) == self.source_seismic_len, assert_msg
 
         # Se crean una lista con todos los indices, se eligen los de train
         # y se quitan de a lista
@@ -214,8 +219,13 @@ class H5Splitter:
         # Los ids que quedan son para test
         nonseismic_test_ids = source_ids
 
+        assert_msg = f"nonseismic_train_ids: {len(nonseismic_train_ids)}\n" \
+                     f"nonseismic_val_ids: {len(nonseismic_val_ids)}\n" \
+                     f"nonseismic_test_ids: {len(nonseismic_test_ids)}\n" \
+                     f"source_ids: {self.source_nonseismic_len}"
+
         assert len(nonseismic_train_ids) + len(nonseismic_val_ids) + len(
-            nonseismic_test_ids) == self.source_nonseismic_len
+            nonseismic_test_ids) == self.source_nonseismic_len, assert_msg
 
         train_ids = [seismic_train_ids, nonseismic_train_ids]
         val_ids = [seismic_val_ids, nonseismic_val_ids]
