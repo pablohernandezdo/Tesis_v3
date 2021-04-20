@@ -205,21 +205,27 @@ def train_model(train_loader, val_loader, net, device, epochs,
 
                 epoch_bar.update()
 
+    if len(model_folder.split("/")) > 1:
+        model_dirname = model_folder.split("/")[-1]
+
+    else:
+        model_dirname = ""
+
     # Plot train and validation accuracies
     learning_curve_acc(tr_accuracies, val_accuracies,
                        f'Figures/Learning_curves/Accuracy/'
-                       f'{model_folder.split("/")[-1]}',
+                       f'{model_dirname}',
                        model_name)
 
     # Plot train and validation losses
     learning_curve_loss(tr_losses, val_losses,
                         f'Figures/Learning_curves/Loss/'
-                        f'{model_folder.split("/")[-1]}',
+                        f'{model_dirname}',
                         model_name)
 
     if not os.path.exists(model_folder):
         os.makedirs(model_folder, exist_ok=True)
-        
+
     torch.save(net.state_dict(),
                f'{model_folder.split("/")[-1]}/{model_name}.pth')
 
