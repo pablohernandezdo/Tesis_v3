@@ -209,11 +209,13 @@ class H5Splitter:
         # Se crean una lista con todos los indices, se eligen los de train
         # y se quitan de a lista
         source_ids = list(range(self.source_nonseismic_len))
-        nonseismic_train_ids = rng.choice(source_ids, nonseis_divs[0])
+        nonseismic_train_ids = rng.choice(source_ids, nonseis_divs[0],
+                                          replace=False)
         source_ids = list(set(source_ids) - set(nonseismic_train_ids))
 
         # Se eligen los ids de val y se quitan de la lista
-        nonseismic_val_ids = rng.choice(source_ids, nonseis_divs[1])
+        nonseismic_val_ids = rng.choice(source_ids, nonseis_divs[1],
+                                        replace=False)
         source_ids = list(set(source_ids) - set(nonseismic_val_ids))
 
         # Los ids que quedan son para test
