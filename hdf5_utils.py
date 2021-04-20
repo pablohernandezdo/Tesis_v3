@@ -161,6 +161,8 @@ class H5Splitter:
                 else:
                     print("Index not found!")
 
+        self.source_h5.close()
+
     def get_traces_division(self):
 
         # Seismic division
