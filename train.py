@@ -217,6 +217,9 @@ def train_model(train_loader, val_loader, net, device, epochs,
                         f'{model_folder.split("/")[-1]}',
                         model_name)
 
+    if not os.path.exists(model_folder):
+        os.makedirs(model_folder, exist_ok=True)
+        
     torch.save(net.state_dict(),
                f'{model_folder.split("/")[-1]}/{model_name}.pth')
 
