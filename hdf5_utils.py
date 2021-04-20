@@ -1,4 +1,5 @@
 import os
+import tqdm
 import h5py
 import json
 import numpy as np
@@ -315,14 +316,21 @@ class H5STEAD:
             out_seis_grp = small_h5.create_group("earthquake/local")
             out_nonseis_grp = small_h5.create_group("non_earthquake/noise")
 
+            seismic_bar = tqdm.tqdm(total=self.n_seis, desc="Seismic traces")
+
+            nonseismic_bar = tqdm.tqdm(total=self.n_nonseis,
+                                       desc="Non Seismic traces")
+
             # Copiar las trazas al nuevo dataset
             for i, arr in enumerate(self.stead_seis_grp):
                 if i in seis_ids_copy:
                     out_seis_grp.copy(self.stead_seis_grp[arr], arr)
+                    seismic_bar.update()
 
             for i, arr in enumerate(self.stead_nonseis_grp):
                 if i in nonseis_ids_copy:
                     out_nonseis_grp.copy(self.stead_nonseis_grp[arr], arr)
+                    nonseismic_bar.update()
 
         # Cerrar los datasets
         self.stead.close()
