@@ -144,7 +144,7 @@ class H5Splitter:
                     print("Index not found!")
 
             # Recorrer trazas no sismicas del dataet
-            for i, dset in self.source_nonseismic_group:
+            for i, dset in enumerate(self.source_nonseismic_group):
 
                 if i in self.train["nonseismic"]:
                     grp_train_nonseismic.copy(
