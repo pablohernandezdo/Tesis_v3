@@ -167,7 +167,7 @@ class H5Splitter:
                                                         self.val_ratio,
                                                         self.test_ratio])
 
-        seis_divs = np.int(np.floor(seis_divs))
+        seis_divs = np.floor(seis_divs).astype(np.int32)
 
         # Trazas que quedan sin grupo se suman al de train
         seis_diff = self.source_seismic_len - np.sum(seis_divs)
@@ -177,7 +177,7 @@ class H5Splitter:
                                                               self.val_ratio,
                                                               self.test_ratio])
 
-        nonseis_divs = np.int(np.floor(nonseis_divs))
+        nonseis_divs = np.floor(nonseis_divs).astype(np.int32)
 
         # Numero de trazas que quedan sin grupo
         nonseis_diff = self.source_nonseismic_len - np.sum(nonseis_divs)
