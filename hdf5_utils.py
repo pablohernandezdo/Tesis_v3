@@ -229,9 +229,12 @@ class H5Splitter:
         assert len(nonseismic_train_ids) + len(nonseismic_val_ids) + len(
             nonseismic_test_ids) == self.source_nonseismic_len, assert_msg
 
-        train_ids = [seismic_train_ids, nonseismic_train_ids]
-        val_ids = [seismic_val_ids, nonseismic_val_ids]
-        test_ids = [seismic_test_ids, nonseismic_test_ids]
+        train_ids = {"seismic": seismic_train_ids,
+                     "nonseismic": nonseismic_train_ids}
+        val_ids = {"seismic": seismic_val_ids,
+                   "nonseismic": nonseismic_val_ids}
+        test_ids = {"seismic": seismic_test_ids,
+                    "nonseismic": nonseismic_test_ids}
 
         return train_ids, val_ids, test_ids
 
