@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 from humanfriendly import format_timespan
 
-from model import *
+from model_cnn import *
 from dataset import HDF5Dataset
 
 
