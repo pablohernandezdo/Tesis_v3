@@ -86,7 +86,7 @@ class H5Splitter:
     def __init__(self, dataset_path, ratios):
 
         self.dataset_path = dataset_path
-        self.dataset_name = self.dataset_path.split("/")[-1]
+        self.dataset_name = self.dataset_path.split("/")[-1].split(".")[0]
 
         assert len(ratios) == 3, "Ratios must have 3 values!"
 
@@ -108,13 +108,14 @@ class H5Splitter:
         # Calcular el numero de trazas para cada uno
         self.train, self.val, self.test = self.get_traces_division()
 
+        dsets_dir = os.path.dirname(self.dataset_path)
         train_name = f"{self.dataset_name}_{self.train_ratio}_train.hdf5"
         val_name = f"{self.dataset_name}_{self.val_ratio}_val.hdf5"
         test_name = f"{self.dataset_name}_{self.test_ratio}_test.hdf5"
 
-        with h5py.File(train_name, "w") as train_h5, \
-                h5py.File(val_name, "w") as val_h5, \
-                h5py.File(test_name, "w") as test_h5:
+        with h5py.File(dsets_dir + '/' + train_name, "w") as train_h5, \
+                h5py.File(dsets_dir + '/' + val_name, "w") as val_h5, \
+                h5py.File(dsets_dir + '/' + test_name, "w") as test_h5:
 
             # Create groups
             grp_train_seismic = train_h5.create_group("earthquake/local")
