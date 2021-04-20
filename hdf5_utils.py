@@ -127,7 +127,7 @@ class H5Splitter:
             grp_test_nonseismic = test_h5.create_group("non_earthquake/noise")
 
             # Recorrer trazas sismicas del dataset
-            for i, dset in self.source_seismic_group:
+            for i, dset in enumerate(self.source_seismic_group):
 
                 if i in self.train["seismic"]:
                     grp_train_seismic.copy(self.source_seismic_group[dset],
