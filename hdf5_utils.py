@@ -318,12 +318,11 @@ class H5STEAD:
             # Copiar las trazas al nuevo dataset
             for i, arr in enumerate(self.stead_seis_grp):
                 if i in seis_ids_copy:
-                    print(type(out_seis_grp))
-                    out_seis_grp.copy(arr, self.stead_seis_grp[arr])
+                    out_seis_grp.copy(self.stead_seis_grp[arr], arr)
 
             for i, arr in enumerate(self.stead_nonseis_grp):
                 if i in nonseis_ids_copy:
-                    out_nonseis_grp.copy(arr, self.stead_nonseis_grp[arr])
+                    out_nonseis_grp.copy(self.stead_nonseis_grp[arr], arr)
 
         # Cerrar los datasets
         self.stead.close()
