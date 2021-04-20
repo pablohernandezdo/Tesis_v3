@@ -81,7 +81,7 @@ class Dsets:
 
 class DatasetFrancia(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetFrancia, self).__init__()
 
         self.savepath = savepath
         self.dataset_path = dataset_path
@@ -106,7 +106,7 @@ class DatasetFrancia(Dsets):
 
 class DatasetNevada(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetNevada, self).__init__()
 
         self.savepath = savepath
         self.dataset_path = dataset_path
@@ -151,7 +151,7 @@ class DatasetNevada(Dsets):
 
 class DatasetBelgica(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetBelgica, self).__init__()
         self.savepath = savepath
         self.dataset_path = dataset_path
 
@@ -160,7 +160,7 @@ class DatasetBelgica(Dsets):
 
 class DatasetReykjanes(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetReykjanes, self).__init__()
 
         self.savepath = savepath
         self.dataset_path = dataset_path
@@ -226,7 +226,7 @@ class DatasetReykjanes(Dsets):
 
 class DatasetCalifornia(Dsets):
     def __init__(self, dataset_paths, savepath):
-        super().__init__()
+        super(DatasetCalifornia, self).__init__()
 
         if len(dataset_paths) != 4:
             print("Se necesitan 4 archivos!")
@@ -280,7 +280,7 @@ class DatasetCalifornia(Dsets):
 
 class DatasetHydraulic(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetHydraulic, self).__init__()
 
         self.savepath = savepath
         self.dataset_path = dataset_path
@@ -316,7 +316,7 @@ class DatasetHydraulic(Dsets):
 
 class DatasetVibroseis(Dsets):
     def __init__(self, dataset_paths, savepath):
-        super().__init__()
+        super(DatasetVibroseis, self).__init__()
 
         if len(dataset_paths) != 4:
             print("Se necesitan 4 archivos!")
@@ -385,7 +385,7 @@ class DatasetVibroseis(Dsets):
 
 class DatasetShaker(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetShaker, self).__init__()
 
         self.savepath = savepath
         self.dataset_path = dataset_path
@@ -418,7 +418,7 @@ class DatasetShaker(Dsets):
 
 class DatasetCoompana(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetCoompana, self).__init__()
 
         self.savepath = savepath
         self.dataset_path = dataset_path
@@ -517,7 +517,7 @@ class DatasetCoompana(Dsets):
 
 class DatasetLesser(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetLesser, self).__init__()
 
         self.savepath = savepath
         self.dataset_path = dataset_path
@@ -558,7 +558,7 @@ class DatasetLesser(Dsets):
 
 class DatasetNCAirgun(Dsets):
     def __init__(self, dataset_path, savepath):
-        super().__init__()
+        super(DatasetNCAirgun, self).__init__()
 
         self.savepath = savepath
         self.dataset_path = dataset_path

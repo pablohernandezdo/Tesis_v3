@@ -1,0 +1,10 @@
+{
+  "Datasets": {
+    "Lesser": {
+      "path": "Data_Preprocessed/Lesser.npy",
+            "type": "nonseismic",
+            "format": "npy"
+    }
+  },
+  "OutputFile": "Data_HDF5/Lesser.hdf5"
+}
