@@ -52,7 +52,7 @@ class VisualizerNpy:
         trace = self.dataset[idx_tr].reshape(10, -1)
 
         plt.figure(figsize=(12, 9))
-        plt.boxplot(trace-T)
+        plt.boxplot(trace.T)
         plt.title(f'Dataset {self.dataset_name}, trace number {idx_tr} boxplot')
         plt.savefig(f"{savepath}/Boxplot_{idx_tr}.png")
         plt.close()
