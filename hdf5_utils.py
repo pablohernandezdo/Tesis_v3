@@ -333,8 +333,6 @@ class H5STEAD:
                     tr = self.stead_seis_grp[arr][:, 0]
                     tr = tr / np.amax(np.abs(tr))
                     out_seis_grp.create_dataset(arr, data=tr)
-
-                    # out_seis_grp.copy(self.stead_seis_grp[arr], arr)
                     seismic_bar.update()
 
             for i, arr in enumerate(self.stead_nonseis_grp):
@@ -342,9 +340,22 @@ class H5STEAD:
                     tr = self.stead_nonseis_grp[arr][:, 0]
                     tr = tr / np.amax(np.abs(tr))
                     out_nonseis_grp.create_dataset(arr, data=tr)
-
-                    # out_nonseis_grp.copy(self.stead_nonseis_grp[arr], arr)
                     nonseismic_bar.update()
 
         # Cerrar los datasets
         self.stead.close()
+
+
+class H5Info:
+    def __init__(self, dataset_path):
+
+        self.dataset_path = dataset_path
+        self.dataset_name = self.dataset_path.split("/")[-1]
+
+        with h5py.File(self.dataset_path, "r") as h5:
+            seis_grp = h5["earthquake/local"]
+            nonseis_grp = h5["non_earthquake/noise"]
+
+            print(f'Dataset: {self.dataset_name}\n'
+                  f'Seismic traces: {len(seis_grp)}\n'
+                  f'Non Seismic traces: {len(nonseis_grp)}')
