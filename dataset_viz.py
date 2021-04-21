@@ -113,7 +113,7 @@ class VisualizerHDF5:
             for i, tr in enumerate(self.nonseis_grp):
                 if i == idx_tr:
                     plt.figure(figsize=(12, 9))
-                    plt.plot(tr[:, 0])
+                    plt.plot(tr[:])
                     plt.title(f'Dataset {self.dataset_name},'
                               f' trace number {idx_tr}')
                     plt.xlabel('Samples')
@@ -154,7 +154,7 @@ class VisualizerHDF5:
             for i, tr in enumerate(self.nonseis_grp):
                 if i in tr_ids:
                     plt.figure(figsize=(12, 9))
-                    plt.plot(tr[:, 0])
+                    plt.plot(tr[:])
                     plt.title(f'Dataset {self.dataset_name},'
                               f' trace number {i}')
                     plt.xlabel('Samples')
@@ -189,7 +189,7 @@ class VisualizerHDF5:
         else:
             for i, tr in enumerate(self.nonseis_grp):
                 if i == idx_tr:
-                    tr = tr[:, 0].reshape(10, -1)
+                    tr = tr[:].reshape(10, -1)
                     plt.figure(figsize=(12, 9))
                     plt.plot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
@@ -226,7 +226,7 @@ class VisualizerHDF5:
         else:
             for i, tr in enumerate(self.nonseis_grp):
                 if i in tr_ids:
-                    tr = tr[:, 0].reshape(10, -1)
+                    tr = tr[:].reshape(10, -1)
                     plt.figure(figsize=(12, 9))
                     plt.plot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
