@@ -30,6 +30,7 @@ class VisualizerNpy:
         plt.ylabel('[-]')
         plt.grid(True)
         plt.savefig(f"{savepath}/Trace_{idx_tr}.png")
+        plt.close()
 
     def plot_random_traces(self, n_tr):
 
@@ -54,6 +55,7 @@ class VisualizerNpy:
         plt.boxplot(trace-T)
         plt.title(f'Dataset {self.dataset_name}, trace number {idx_tr} boxplot')
         plt.savefig(f"{savepath}/Boxplot_{idx_tr}.png")
+        plt.close()
 
     def plot_random_boxplot(self, n_tr):
         rng = default_rng()

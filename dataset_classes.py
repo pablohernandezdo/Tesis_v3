@@ -85,7 +85,7 @@ class DASDsets(Dsets):
 
     def save_heatmap(self, clip=None):
         pass
-    
+
 
 class DatasetFrancia(Dsets):
     def __init__(self, dataset_path, savepath):
