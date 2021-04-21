@@ -44,7 +44,7 @@ class Results:
         self.fscore = fscore
 
         self.pr_auc, self.roc_auc = self.get_aucs(self.prec, self.rec, self.fpr)
-        self.best_threshold = self.thresholds(np.argmax(self.fscore))
+        self.best_threshold = self.thresholds[np.argmax(self.fscore)]
         self.best_fscore = np.amax(self.fscore)
 
         self.save_histogram()
