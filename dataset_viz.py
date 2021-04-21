@@ -180,7 +180,7 @@ class VisualizerHDF5:
                 if i == idx_tr:
                     tr = self.seis_grp[tr][:, 0].reshape(10, -1)
                     plt.figure(figsize=(12, 9))
-                    plt.plot(tr.T)
+                    plt.boxplot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
                               f' boxplot number {idx_tr}')
                     plt.savefig(f"{savepath}/Boxplot_{idx_tr}.png")
@@ -191,7 +191,7 @@ class VisualizerHDF5:
                 if i == idx_tr:
                     tr = self.nonseis_grp[tr][:, 0].reshape(10, -1)
                     plt.figure(figsize=(12, 9))
-                    plt.plot(tr.T)
+                    plt.boxplot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
                               f' boxplot number {idx_tr}')
                     plt.savefig(f"{savepath}/Boxplot_{idx_tr}.png")
@@ -217,7 +217,7 @@ class VisualizerHDF5:
                 if i in tr_ids:
                     tr = self.seis_grp[tr][:, 0].reshape(10, -1)
                     plt.figure(figsize=(12, 9))
-                    plt.plot(tr.T)
+                    plt.boxplot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
                               f' boxplot number {i}')
                     plt.savefig(f"{savepath}/Boxplot_{i}.png")
@@ -228,7 +228,7 @@ class VisualizerHDF5:
                 if i in tr_ids:
                     tr = self.nonseis_grp[tr][:, 0].reshape(10, -1)
                     plt.figure(figsize=(12, 9))
-                    plt.plot(tr.T)
+                    plt.boxplot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
                               f' boxplot number {i}')
                     plt.xlabel('Samples')
