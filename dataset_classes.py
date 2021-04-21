@@ -79,6 +79,14 @@ class Dsets:
         return traces, fs
 
 
+class DASDsets(Dsets):
+    def __init__(self):
+        super(DASDsets, self).__init__()
+
+    def save_heatmap(self, clip=None):
+        pass
+    
+
 class DatasetFrancia(Dsets):
     def __init__(self, dataset_path, savepath):
         super(DatasetFrancia, self).__init__()
