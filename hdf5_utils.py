@@ -358,4 +358,4 @@ class H5Info:
 
             print(f'Dataset: {self.dataset_name}\n'
                   f'Seismic traces: {len(seis_grp)}\n'
-                  f'Non Seismic traces: {len(nonseis_grp)}')
+                  f'Non Seismic traces: {len(nonseis_grp)}\n')
