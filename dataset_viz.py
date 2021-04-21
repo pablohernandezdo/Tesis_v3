@@ -36,6 +36,7 @@ class VisualizerNpy:
     def plot_random_traces(self, n_tr):
 
         rng = default_rng()
+        assert n_tr < len(self.dataset), "Too many traces!"
         tr_ids = rng.choice(len(self.dataset), n_tr, replace=False)
 
         for i in tr_ids:
@@ -60,6 +61,7 @@ class VisualizerNpy:
 
     def plot_random_boxplot(self, n_tr):
         rng = default_rng()
+        assert n_tr < len(self.dataset), "Too many boxplots!"
         tr_ids = rng.choice(len(self.dataset), n_tr, replace=False)
 
         for i in tr_ids:
@@ -129,9 +131,11 @@ class VisualizerHDF5:
         rng = default_rng()
         if tr_type == "seismic":
             savepath = f"Figures/{self.dataset_name}/Traces/Seismic"
+            assert n_tr < self.len_seis, "Too many traces!"
             tr_ids = rng.choice(self.len_seis, n_tr, replace=False)
         else:
             savepath = f"Figures/{self.dataset_name}/Traces/NonSeismic"
+            assert n_tr < self.len_nonseis, "Too many boxplots!"
             tr_ids = rng.choice(self.len_nonseis, n_tr, replace=False)
 
         if not os.path.exists(savepath):
@@ -204,9 +208,11 @@ class VisualizerHDF5:
         rng = default_rng()
         if tr_type == "seismic":
             savepath = f"Figures/{self.dataset_name}/Boxplot/Seismic"
+            assert n_tr < self.len_seis, "Too many boxplots!"
             tr_ids = rng.choice(self.len_seis, n_tr, replace=False)
         else:
             savepath = f"Figures/{self.dataset_name}/Boxplot/NonSeismic"
+            assert n_tr < self.len_nonseis, "Too many boxplots!"
             tr_ids = rng.choice(self.len_nonseis, n_tr, replace=False)
 
         if not os.path.exists(savepath):
