@@ -8881,3 +8881,4 @@ class Cnn2_10_10(nn.Module):
         wave = F.relu(self.l1(wave))
         wave = self.l2(wave)
         return self.sigmoid(wave)
+
