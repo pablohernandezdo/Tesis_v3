@@ -39,15 +39,17 @@ class H5Builder:
                 traces = np.load(dset_params["path"])
                 if dset_params["type"] == "seismic":
                     for i, tr in enumerate(traces):
-                        tr = np.expand_dims(tr, 1)
-                        tr = np.hstack([tr] * 3).astype("float32")
-                        g_earthquake.create_dataset(f"{dset}-{i}", data=tr)
+                        # tr = np.expand_dims(tr, 1)
+                        # tr = np.hstack([tr] * 3).astype("float32")
+                        g_earthquake.create_dataset(f"{dset}-{i}",
+                                                    data=tr.astype(np.float32))
 
                 elif dset_params["type"] == "nonseismic":
                     for i, tr in enumerate(traces):
-                        tr = np.expand_dims(tr, 1)
-                        tr = np.hstack([tr] * 3).astype("float32")
-                        g_non_earthquake.create_dataset(f"{dset}-{i}", data=tr)
+                        # tr = np.expand_dims(tr, 1)
+                        # tr = np.hstack([tr] * 3).astype("float32")
+                        g_non_earthquake.create_dataset(f"{dset}-{i}",
+                                                        data=tr.astype(np.float32))
 
                 else:
                     print(f"Bad dataset type! Dataset: {dset}")
@@ -306,10 +308,10 @@ class H5STEAD:
         # Seleccionar indices de trazas a copiar
         rng = default_rng()
 
-        seis_ids_copy = rng.choice(len(source_seis_ids),
+        seis_ids_copy = rng.choice(source_seis_ids,
                                    self.n_seis, replace=False)
 
-        nonseis_ids_copy = rng.choice(len(source_nonseis_ids),
+        nonseis_ids_copy = rng.choice(source_nonseis_ids,
                                       self.n_nonseis, replace=False)
 
         os.makedirs(os.path.dirname(self.out_path), exist_ok=True)
@@ -328,12 +330,18 @@ class H5STEAD:
             # Copiar las trazas al nuevo dataset
             for i, arr in enumerate(self.stead_seis_grp):
                 if i in seis_ids_copy:
-                    out_seis_grp.copy(self.stead_seis_grp[arr], arr)
+                    out_seis_grp.create_dataset(arr,
+                                                data=self.stead_seis_grp[arr][:, 0])
+
+                    # out_seis_grp.copy(self.stead_seis_grp[arr], arr)
                     seismic_bar.update()
 
             for i, arr in enumerate(self.stead_nonseis_grp):
                 if i in nonseis_ids_copy:
-                    out_nonseis_grp.copy(self.stead_nonseis_grp[arr], arr)
+                    out_nonseis_grp.create_dataset(arr,
+                                                   data=self.stead_nonseis_grp[arr][:, 0])
+
+                    # out_nonseis_grp.copy(self.stead_nonseis_grp[arr], arr)
                     nonseismic_bar.update()
 
         # Cerrar los datasets
