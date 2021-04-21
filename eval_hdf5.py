@@ -107,8 +107,14 @@ def evaluate_dataset(data_loader, dataset_name, device, net,
 
     test_outputs = pd.DataFrame(dataframe_rows_list)
 
+    if len(model_folder.split("/")) > 1:
+        model_dirname = model_folder.split("/")[-1]
+
+    else:
+        model_dirname = ""
+
     # Create csv folder if necessary
-    save_folder = f'{csv_folder}/{dataset_name}/{model_folder}'
+    save_folder = f'{csv_folder}/{dataset_name}/{model_dirname}'
 
     if not os.path.exists(save_folder):
         os.makedirs(save_folder, exist_ok=True)
