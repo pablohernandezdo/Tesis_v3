@@ -109,7 +109,12 @@ class H5Splitter:
         # Calcular el numero de trazas para cada uno
         self.train, self.val, self.test = self.get_traces_division()
 
-        dsets_dir = os.path.dirname(self.dataset_path)
+        dsets_dir = f'{os.path.dirname(self.dataset_path)}/' \
+                    f'{self.dataset_name}'
+
+        if not os.path.exists(dsets_dir):
+            os.makedirs(dsets_dir)
+
         train_name = f"{self.dataset_name}_{self.train_ratio}_train.hdf5"
         val_name = f"{self.dataset_name}_{self.val_ratio}_val.hdf5"
         test_name = f"{self.dataset_name}_{self.test_ratio}_test.hdf5"
