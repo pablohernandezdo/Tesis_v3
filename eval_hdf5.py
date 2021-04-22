@@ -40,14 +40,14 @@ def main():
     train_loader = DataLoader(train_set,
                               batch_size=args.batch_size,
                               shuffle=True,
-                              num_workers=4)
+                              num_workers=8)
 
     # Test dataset
     test_set = HDF5Dataset(args.test_path)
     test_loader = DataLoader(test_set,
                              batch_size=args.batch_size,
                              shuffle=True,
-                             num_workers=4)
+                             num_workers=8)
 
     # Load specified Classifier
     net = get_classifier(args.classifier)
