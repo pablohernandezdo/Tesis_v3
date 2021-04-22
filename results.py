@@ -5,10 +5,11 @@ import matplotlib.pyplot as plt
 
 
 class Results:
-    def __init__(self, csv_path, beta=2, n_thresholds=100):
+    def __init__(self, csv_path, dset, beta=2, n_thresholds=100):
 
         self.csv_path = csv_path
         self.beta = beta
+        self.dset = dset
 
         self.n_thresholds = n_thresholds
         self.thresholds = np.linspace(0, 1, self.n_thresholds + 1)[:-1]
@@ -81,8 +82,8 @@ class Results:
         return acc, recall, precision, fpr, fscore
 
     def save_histogram(self):
-        if not os.path.exists("Figures/Histogram"):
-            os.makedirs("Figures/Histogram", exist_ok=True)
+        if not os.path.exists(f"Figures/Histogram/{self.dset}"):
+            os.makedirs(f"Figures/Histogram/{self.dset}", exist_ok=True)
 
         plt.figure(figsize=(12, 9))
         plt.hist(self.df[self.df['label'] == 1]['out'], 100)
@@ -92,12 +93,12 @@ class Results:
         plt.ylabel('Counts')
         plt.legend(['positive', 'negative'], loc='upper left')
         plt.grid(True)
-        plt.savefig(f"Figures/Histogram/{self.model_name}.png")
+        plt.savefig(f"Figures/Histogram/{self.dset}/{self.model_name}.png")
         plt.close()
 
     def save_fsc(self):
-        if not os.path.exists("Figures/Fscore"):
-            os.makedirs("Figures/Fscore", exist_ok=True)
+        if not os.path.exists(f"Figures/Fscore/{self.dset}"):
+            os.makedirs(f"Figures/Fscore{self.dset}/", exist_ok=True)
 
         plt.figure(figsize=(12, 9))
         plt.plot(self.thresholds, self.fscore, '--o')
@@ -105,12 +106,12 @@ class Results:
         plt.ylabel('F-score')
         plt.title('Fscores vs Thresholds')
         plt.grid(True)
-        plt.savefig(f"Figures/Fscore/{self.model_name}.png")
+        plt.savefig(f"Figures/Fscore/{self.dset}/{self.model_name}.png")
         plt.close()
 
     def save_pr(self):
-        if not os.path.exists("Figures/PR"):
-            os.makedirs("Figures/PR", exist_ok=True)
+        if not os.path.exists(f"Figures/PR/{self.dset}/"):
+            os.makedirs(f"Figures/PR/{self.dset}", exist_ok=True)
 
         plt.figure(figsize=(12, 9))
         plt.plot(self.rec, self.prec, '--o')
@@ -119,12 +120,12 @@ class Results:
         plt.ylabel('Precision')
         plt.title('Precision vs Recall (PR curve)')
         plt.grid(True)
-        plt.savefig(f"Figures/PR/{self.model_name}.png")
+        plt.savefig(f"Figures/PR/{self.dset}/{self.model_name}.png")
         plt.close()
 
     def save_roc(self):
-        if not os.path.exists("Figures/ROC"):
-            os.makedirs("Figures/ROC", exist_ok=True)
+        if not os.path.exists(f"Figures/ROC/{self.dset}/"):
+            os.makedirs(f"Figures/ROC/{self.dset}/", exist_ok=True)
 
         plt.figure(figsize=(12, 9))
         plt.plot(self.fpr, self.rec, '--o')
@@ -133,6 +134,6 @@ class Results:
         plt.ylabel('Recall')
         plt.title('Recall vs FPR (ROC curve)')
         plt.grid(True)
-        plt.savefig(f"Figures/ROC/{self.model_name}.png")
+        plt.savefig(f"Figures/ROC/{self.dset}/{self.model_name}.png")
         plt.close()
 
