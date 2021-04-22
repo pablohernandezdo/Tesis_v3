@@ -9,7 +9,7 @@ class HDF5Dataset(data.Dataset):
     # Class to read an hdf5 file as pytorch dataset
 
     def __init__(self, file_path):
-        super().__init__()
+        super(HDF5Dataset, self).__init__()
         # HDF5 dataset path
         self.file_path = file_path
 
@@ -42,3 +42,24 @@ class HDF5Dataset(data.Dataset):
                     if idx == item:
                         out = grp[dts][:]
                         return torch.from_numpy(out), torch.tensor([1])
+
+
+class NpyDataset(data.Dataset):
+    # Class to read an npy dataset
+
+    def __init__(self, file_path):
+        super(NpyDataset, self).__init__()
+
+        self.file_path = file_path
+        self.dset = np.load(self.file_path)
+
+    def __len__(self):
+        return len(self.dset)
+
+    def __getitem__(self, item):
+
+        data = self.dset[item]
+        trace = data[:6000]
+        label = data[-1]
+
+        return torch.from_numpy(trace), torch.tensor([label])

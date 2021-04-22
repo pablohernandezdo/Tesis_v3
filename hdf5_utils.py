@@ -364,3 +364,42 @@ class H5Info:
             print(f'Dataset: {self.dataset_name}\n'
                   f'Seismic traces: {len(seis_grp)}\n'
                   f'Non Seismic traces: {len(nonseis_grp)}\n')
+
+
+class H52Npy:
+    """
+    Crear dataset de entrenamiento npy desde dataset hdf5, para probar
+    velocidad de entrenamineto/prueba
+    """
+    def __init__(self, dataset_path):
+
+        self. dataset_path = dataset_path
+        self.dataset_name = self.dataset_path.split("/")[-1].split(".")[0]
+        self.dataset_folder = "".join(self.dataset_path.split("/")[:-1])
+
+        with h5py.File(self.dataset_path, "r") as h5:
+
+            seis_grp = h5["earthquake/local"]
+            nonseis_grp = h5["non_earthquake/noise"]
+
+            seis_trs = []
+            nonseis_trs = []
+
+            # Copy seismic traces
+            for dset in seis_grp:
+                label = 1
+                tr = seis_grp[dset][:]
+                seis_trs.append(np.hstack([tr, label]))
+
+            # Copy non seismic traces
+            for dset in nonseis_grp:
+                label = 0
+                tr = nonseis_grp[dset][:]
+                seis_trs.append(np.hstack([tr, label]))
+
+        seis_trs = np.asarray(seis_trs)
+        nonseis_trs = np.asarray(nonseis_trs)
+
+        all_tr = np.vstack([seis_trs, nonseis_trs])
+
+        np.save(f"{self.dataset_folder}/{self.dataset_name}.npy", all_tr)
