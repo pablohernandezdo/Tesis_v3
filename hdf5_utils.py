@@ -395,7 +395,7 @@ class H52Npy:
             for dset in nonseis_grp:
                 label = 0
                 tr = nonseis_grp[dset][:]
-                seis_trs.append(np.hstack([tr, label]))
+                nonseis_trs.append(np.hstack([tr, label]))
 
         seis_trs = np.asarray(seis_trs)
         nonseis_trs = np.asarray(nonseis_trs)
