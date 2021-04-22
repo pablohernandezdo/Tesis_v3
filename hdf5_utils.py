@@ -398,10 +398,10 @@ class H52Npy:
                 tr = nonseis_grp[dset][:]
                 nonseis_trs.append(np.hstack([tr, label]))
 
-        seis_trs = np.asarray(seis_trs, dtype=np.float32)
-        nonseis_trs = np.asarray(nonseis_trs, dtype=np.float32)
+        seis_trs = np.asarray(seis_trs, dtype=np.float16)
+        nonseis_trs = np.asarray(nonseis_trs, dtype=np.float16)
 
         all_tr = np.vstack([seis_trs, nonseis_trs])
 
         np.save(f"{self.dataset_folder}/{self.dataset_name}.npy",
-                all_tr.astype(np.float32))
+                all_tr.astype(np.float16))
