@@ -373,8 +373,9 @@ class H52Npy:
     """
     def __init__(self, dataset_path):
 
+        name = dataset_path.split("/")[-1]
         self. dataset_path = dataset_path
-        self.dataset_name = self.dataset_path.split("/")[-1].split(".")[0]
+        self.dataset_name = "".join(name.split(".")[:-1])
         self.dataset_folder = "".join(self.dataset_path.split("/")[:-1])
 
         with h5py.File(self.dataset_path, "r") as h5:
