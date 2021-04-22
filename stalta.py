@@ -34,4 +34,5 @@ class Trigger:
             df.loc[i] = [i, trig]
 
         os.makedirs("STA-LTA-Triggers", exist_ok=True)
-        df.to_csv(f"STA-LTA-Triggers/{self.dataset_name}.csv", index=False)
+        df.to_csv(f"STA-LTA-Triggers/{self.dataset_name}_{self.thresh}.csv",
+                  index=False)
