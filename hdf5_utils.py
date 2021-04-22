@@ -402,4 +402,5 @@ class H52Npy:
 
         all_tr = np.vstack([seis_trs, nonseis_trs])
 
-        np.save(f"{self.dataset_folder}/{self.dataset_name}.npy", all_tr)
+        np.save(f"{self.dataset_folder}/{self.dataset_name}.npy",
+                all_tr.astype(np.float32))
