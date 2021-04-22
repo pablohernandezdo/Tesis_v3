@@ -59,7 +59,7 @@ class NpyDataset(data.Dataset):
     def __getitem__(self, item):
 
         data = self.dset[item]
-        trace = data[:6000].astype(np.float64)
-        label = data[-1].astype(np.float64)
+        trace = data[:6000].astype(np.float32)
+        label = data[-1].astype(np.float32)
 
         return torch.from_numpy(trace), torch.tensor([label])
