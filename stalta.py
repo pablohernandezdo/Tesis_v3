@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 
@@ -32,6 +33,5 @@ class Trigger:
 
             df.loc[i] = [i, trig]
 
+        os.makedirs("STA-LTA-Triggers", exist_ok=True)
         df.to_csv(f"STA-LTA-Triggers/{self.dataset_name}", index=False)
-
-
