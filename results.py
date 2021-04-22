@@ -98,7 +98,7 @@ class Results:
 
     def save_fsc(self):
         if not os.path.exists(f"Figures/Fscore/{self.dset}"):
-            os.makedirs(f"Figures/Fscore{self.dset}/", exist_ok=True)
+            os.makedirs(f"Figures/Fscore/{self.dset}/", exist_ok=True)
 
         plt.figure(figsize=(12, 9))
         plt.plot(self.thresholds, self.fscore, '--o')
