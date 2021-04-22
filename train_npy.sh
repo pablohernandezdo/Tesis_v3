@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python train.py \
+python train_npy.py \
         --lr 1e-4 \
         --epochs 1 \
         --batch_size 256 \
