@@ -8,5 +8,5 @@ python train_npy.py \
         --model_folder 'models'  \
         --classifier Cnn1_3k_10 \
         --model_name Cnn1_3k_10_1e4_256_30_SG \
-        --train_path "Data_HDF5/STEAD_STEAD_0.8_train.npy" \
-        --val_path "Data_HDF5/STEAD_STEAD_0.1_val.npy"
+        --train_path "Data_HDF5/STEAD-STEAD_0.8_train.npy" \
+        --val_path "Data_HDF5/STEAD-STEAD_0.1_val.npy"
