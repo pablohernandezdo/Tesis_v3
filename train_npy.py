@@ -199,7 +199,7 @@ def train_model(train_loader, dataset_name, val_loader, net, device, epochs,
 
                     # Save loss to list
                     val_losses.append(val_avg_loss)
-                    tr_losses.append(loss.cpu())
+                    tr_losses.append(loss.cpu().detach().numpy())
 
                     # Append training and validation accuracies
                     tr_accuracies.append(train_acc)
