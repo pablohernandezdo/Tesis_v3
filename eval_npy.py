@@ -106,7 +106,7 @@ def evaluate_dataset(data_loader, dataset_name, device, net,
 
                 for out, lab in zip(outputs, labels):
                     new_row = {'out': out.item(),
-                               'label': lab.item().astype(np.int_)}
+                               'label': int(lab.item())}
                     dataframe_rows_list.append(new_row)
 
                 data_bar.update(1)
