@@ -36,5 +36,5 @@
             "format": "npy"
         }
     },
-    "OutputFile": "Data/HDF5/DAS_test_dataset.hdf5"
+    "OutputFile": "Data/HDF5/DAS-test/DAS_test.hdf5"
 }

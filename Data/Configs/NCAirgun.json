@@ -6,5 +6,5 @@
             "format": "npy"
     }
   },
-  "OutputFile": "Data/HDF5/NCAirgun.hdf5"
+  "OutputFile": "Data/HDF5/NCAirgun/NCAirgun.hdf5"
 }

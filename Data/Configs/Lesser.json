@@ -6,5 +6,5 @@
             "format": "npy"
     }
   },
-  "OutputFile": "Data/HDF5/Lesser.hdf5"
+  "OutputFile": "Data/HDF5/Lesser/Lesser.hdf5"
 }
