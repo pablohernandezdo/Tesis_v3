@@ -1,10 +1,10 @@
 {
   "Datasets": {
     "Coompana": {
-      "path": "Data_Preprocessed/Coompana.npy",
+      "path": "Data/Data_Preprocessed/Coompana.npy",
             "type": "nonseismic",
             "format": "npy"
     }
   },
-  "OutputFile": "Data_HDF5/Coompana.hdf5"
+  "OutputFile": "Data/Data_HDF5/Coompana.hdf5"
 }

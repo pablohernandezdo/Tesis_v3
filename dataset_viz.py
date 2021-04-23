@@ -19,7 +19,7 @@ class VisualizerNpy:
 
         assert(idx_tr < len(self.dataset)), "Invalid trace number!"
 
-        savepath = f"Figures/{self.dataset_name}/Traces"
+        savepath = f"Figures/Datasets/{self.dataset_name}/Traces"
 
         if not os.path.exists(savepath):
             os.makedirs(savepath, exist_ok=True)
@@ -46,7 +46,7 @@ class VisualizerNpy:
 
         assert (idx_tr < len(self.dataset)), "Invalid trace number!"
 
-        savepath = f"Figures/{self.dataset_name}/Boxplots"
+        savepath = f"Figures/Datasets/{self.dataset_name}/Boxplots"
 
         if not os.path.exists(savepath):
             os.makedirs(savepath, exist_ok=True)
@@ -90,10 +90,10 @@ class VisualizerHDF5:
         assert tr_type in ["seismic", "non_seismic"], "Invalid trace type!"
         if tr_type == "seismic":
             assert idx_tr < self.len_seis, "Invalid trace number!"
-            savepath = f"Figures/{self.dataset_name}/Traces/Seismic"
+            savepath = f"Figures/Datasets/{self.dataset_name}/Traces/Seismic"
         else:
             assert idx_tr < self.len_nonseis, "Invalid trace number!"
-            savepath = f"Figures/{self.dataset_name}/Traces/NonSeismic"
+            savepath = f"Figures/Datasets/{self.dataset_name}/Traces/NonSeismic"
 
         if not os.path.exists(savepath):
             os.makedirs(savepath, exist_ok=True)
@@ -130,11 +130,11 @@ class VisualizerHDF5:
 
         rng = default_rng()
         if tr_type == "seismic":
-            savepath = f"Figures/{self.dataset_name}/Traces/Seismic"
+            savepath = f"Figures/Datasets/{self.dataset_name}/Traces/Seismic"
             assert n_tr < self.len_seis, "Too many traces!"
             tr_ids = rng.choice(self.len_seis, n_tr, replace=False)
         else:
-            savepath = f"Figures/{self.dataset_name}/Traces/NonSeismic"
+            savepath = f"Figures/Datasets/{self.dataset_name}/Traces/NonSeismic"
             assert n_tr < self.len_nonseis, "Too many boxplots!"
             tr_ids = rng.choice(self.len_nonseis, n_tr, replace=False)
 
@@ -171,10 +171,10 @@ class VisualizerHDF5:
         assert tr_type in ["seismic", "non_seismic"], "Invalid trace type!"
         if tr_type == "seismic":
             assert idx_tr < self.len_seis, "Invalid trace number!"
-            savepath = f"Figures/{self.dataset_name}/Boxplot/Seismic"
+            savepath = f"Figures/Datasets/{self.dataset_name}/Boxplot/Seismic"
         else:
             assert idx_tr < self.len_nonseis, "Invalid trace number!"
-            savepath = f"Figures/{self.dataset_name}/Boxplot/NonSeismic"
+            savepath = f"Figures/Datasets/{self.dataset_name}/Boxplot/NonSeismic"
 
         if not os.path.exists(savepath):
             os.makedirs(savepath, exist_ok=True)
@@ -207,11 +207,11 @@ class VisualizerHDF5:
 
         rng = default_rng()
         if tr_type == "seismic":
-            savepath = f"Figures/{self.dataset_name}/Boxplot/Seismic"
+            savepath = f"Figures/Datasets/{self.dataset_name}/Boxplot/Seismic"
             assert n_tr < self.len_seis, "Too many boxplots!"
             tr_ids = rng.choice(self.len_seis, n_tr, replace=False)
         else:
-            savepath = f"Figures/{self.dataset_name}/Boxplot/NonSeismic"
+            savepath = f"Figures/Datasets/{self.dataset_name}/Boxplot/NonSeismic"
             assert n_tr < self.len_nonseis, "Too many boxplots!"
             tr_ids = rng.choice(self.len_nonseis, n_tr, replace=False)
 

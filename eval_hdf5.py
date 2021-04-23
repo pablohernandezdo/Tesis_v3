@@ -18,6 +18,9 @@ def main():
 
     # Args
     parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset_name",
+                        default='STEAD-STEAD',
+                        help="Name of dataset to evaluate on")
     parser.add_argument("--model_name", default='1h6k_test_model',
                         help="Name of model to eval")
     parser.add_argument("--model_folder", default='models',
@@ -62,16 +65,18 @@ def main():
     net.eval()
 
     # Evaluate model on training dataset
-    evaluate_dataset(train_loader, 'Train', device,
-                     net, args.model_name, args.model_folder,
+    evaluate_dataset(train_loader, args.dataset_name + '/Train',
+                     device, net, args.model_name,
+                     args.model_folder,
                      'Net_outputs')
 
     train_end = time.time()
     train_time = train_end - start_time
 
     # Evaluate model on test set
-    evaluate_dataset(test_loader, 'Test', device,
-                     net, args.model_name, args.model_folder,
+    evaluate_dataset(test_loader, args.dataset_name + '/Test',
+                     device, net, args.model_name,
+                     args.model_folder,
                      'Net_outputs')
 
     eval_end = time.time()

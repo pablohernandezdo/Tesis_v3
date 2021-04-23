@@ -1,40 +1,40 @@
 {
     "Datasets": {
         "Francia": {
-            "path": "Data_Preprocessed/Francia.npy",
+            "path": "Data/Data_Preprocessed/Francia.npy",
             "type": "seismic",
             "format": "npy"
         },
         "Nevada": {
-            "path": "Data_Preprocessed/Francia.npy",
+            "path": "Data/Data_Preprocessed/Francia.npy",
             "type": "seismic",
             "format": "npy"
         },
         "Reykjanes": {
-            "path": "Data_Preprocessed/Francia.npy",
+            "path": "Data/Data_Preprocessed/Francia.npy",
             "type": "seismic",
             "format": "npy"
         },
         "California": {
-            "path": "Data_Preprocessed/Francia.npy",
+            "path": "Data/Data_Preprocessed/Francia.npy",
             "type": "nonseismic",
             "format": "npy"
         },
         "Hydraulic": {
-            "path": "Data_Preprocessed/Francia.npy",
+            "path": "Data/Data_Preprocessed/Francia.npy",
             "type": "nonseismic",
             "format": "npy"
         },
         "Vibroseis": {
-            "path": "Data_Preprocessed/Francia.npy",
+            "path": "Data/Data_Preprocessed/Francia.npy",
             "type": "nonseismic",
             "format": "npy"
         },
         "Shaker": {
-            "path": "Data_Preprocessed/Francia.npy",
+            "path": "Data/Data_Preprocessed/Francia.npy",
             "type": "nonseismic",
             "format": "npy"
         }
     },
-    "OutputFile": "Data_HDF5/DAS_test_dataset.hdf5"
+    "OutputFile": "Data/Data_HDF5/DAS_test_dataset.hdf5"
 }

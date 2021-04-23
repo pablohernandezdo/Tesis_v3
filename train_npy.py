@@ -22,6 +22,9 @@ def main():
 
     # Args
     parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset_name",
+                        default='STEAD-STEAD',
+                        help="Name of dataset to evaluate on")
     parser.add_argument("--model_name", default='1h6k_test_model',
                         help="Name of model to save")
     parser.add_argument("--model_folder", default='test',
@@ -82,7 +85,7 @@ def main():
                            betas=(args.b1, args.b2), weight_decay=args.wd)
 
     # Train model
-    train_model(train_loader, val_loader, net,
+    train_model(train_loader, args.dataset_name, val_loader, net,
                 device, args.epochs, optimizer, criterion,
                 args.earlystop, args.patience, args.eval_iter,
                 f'{args.model_folder}', args.model_name)
@@ -98,7 +101,7 @@ def main():
           f'Training time: {format_timespan(train_time)}')
 
 
-def train_model(train_loader, val_loader, net, device, epochs,
+def train_model(train_loader, dataset_name, val_loader, net, device, epochs,
                 optimizer, criterion, earlystop, patience,
                 eval_iter, model_folder, model_name):
 
@@ -218,14 +221,14 @@ def train_model(train_loader, val_loader, net, device, epochs,
 
     # Plot train and validation accuracies
     learning_curve_acc(tr_accuracies, val_accuracies,
-                       f'Figures/Learning_curves/Accuracy/'
-                       f'{model_dirname}',
+                       f'Figures/Learning_curves/{dataset_name}/'
+                       f'Accuracy/{model_dirname}',
                        model_name)
 
     # Plot train and validation losses
     learning_curve_loss(tr_losses, val_losses,
-                        f'Figures/Learning_curves/Loss/'
-                        f'{model_dirname}',
+                        f'Figures/Learning_curves/{dataset_name}/'
+                        f'Loss/{model_dirname}',
                         model_name)
 
     if not os.path.exists(model_folder):
