@@ -1,4 +1,4 @@
-#!/bin/bash<
+#!/bin/bash
 
 python eval_npy.py \
         --batch_size 256 \
