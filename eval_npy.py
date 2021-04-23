@@ -2,6 +2,7 @@ import os
 import time
 import argparse
 
+import numpy as np
 import tqdm
 import torch
 import pandas as pd
@@ -104,7 +105,8 @@ def evaluate_dataset(data_loader, dataset_name, device, net,
                 outputs = net(traces)
 
                 for out, lab in zip(outputs, labels):
-                    new_row = {'out': out.item(), 'label': lab.item()}
+                    new_row = {'out': out.item(),
+                               'label': lab.item().astype(np.int_)}
                     dataframe_rows_list.append(new_row)
 
                 data_bar.update(1)
