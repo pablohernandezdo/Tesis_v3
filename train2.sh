@@ -1,7 +1,7 @@
 #!/bin/bash
 
 python train.py \
-        --lr 1e-4 \
+        --lr 1e-5 \
         --epochs 1 \
         --batch_size 256 \
         --patience 30 \
