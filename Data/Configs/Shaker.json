@@ -1,6 +1,6 @@
 {
   "Datasets": {
-    "Coompana": {
+    "Shaker": {
       "path": "Data/Preprocessed/Shaker.npy",
             "type": "nonseismic",
             "format": "npy"

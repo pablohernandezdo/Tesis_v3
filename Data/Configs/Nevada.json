@@ -1,6 +1,6 @@
 {
   "Datasets": {
-    "Coompana": {
+    "Nevada": {
       "path": "Data/Preprocessed/Nevada.npy",
             "type": "seismic",
             "format": "npy"

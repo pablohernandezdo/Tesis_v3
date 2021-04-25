@@ -1,6 +1,6 @@
 {
   "Datasets": {
-    "Coompana": {
+    "Francia": {
       "path": "Data/Preprocessed/Francia.npy",
             "type": "seismic",
             "format": "npy"

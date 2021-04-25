@@ -1,6 +1,6 @@
 {
   "Datasets": {
-    "Coompana": {
+    "Hydraulic": {
       "path": "Data/Preprocessed/Hydraulic.npy",
             "type": "nonseismic",
             "format": "npy"
