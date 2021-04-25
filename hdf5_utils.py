@@ -396,7 +396,12 @@ class H52Npy:
         seis_trs = np.asarray(seis_trs, dtype=np.float16)
         nonseis_trs = np.asarray(nonseis_trs, dtype=np.float16)
 
-        all_tr = np.vstack([seis_trs, nonseis_trs])
+        if seis_trs.size == 0:
+            all_tr = nonseis_trs
+        elif nonseis_trs == 0:
+            all_tr = seis_trs
+        else:
+            all_tr = np.vstack([seis_trs, nonseis_trs])
 
         os.makedirs("Data/TrainReady/", exist_ok=True)
 
