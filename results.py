@@ -8,8 +8,8 @@ class Results:
     def __init__(self, csv_path, dset, beta=2, n_thresholds=100):
 
         self.csv_path = csv_path
-        self.beta = beta
         self.dset = dset
+        self.beta = beta
 
         self.n_thresholds = n_thresholds
         self.thresholds = np.linspace(0, 1, self.n_thresholds + 1)[:-1]
