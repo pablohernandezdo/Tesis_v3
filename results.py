@@ -70,7 +70,10 @@ class Results:
         else:
             precision = tp / (tp + fp)
 
-        recall = tp / (tp + fn)
+        if (not tp) and (not fn):
+            recall = 0
+        else:
+            recall = tp / (tp + fn)
 
         if (not fp) and (not tn):
             fpr = 0
