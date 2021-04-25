@@ -398,7 +398,7 @@ class H52Npy:
 
         if seis_trs.size == 0:
             all_tr = nonseis_trs
-        elif nonseis_trs == 0:
+        elif nonseis_trs.size == 0:
             all_tr = seis_trs
         else:
             all_tr = np.vstack([seis_trs, nonseis_trs])
