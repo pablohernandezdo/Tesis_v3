@@ -10,7 +10,7 @@ class Comp:
         self.csv1_path = csv1_path
         self.csv2_path = csv2_path
         self.dset = dset
-        self.beta = 2
+        self.beta = beta
 
         self.n_thresholds = n_thresholds
         self.thresholds = np.linspace(0, 1, self.n_thresholds + 1)[:-1]
