@@ -71,7 +71,11 @@ class Results:
             precision = tp / (tp + fp)
 
         recall = tp / (tp + fn)
-        fpr = fp / (fp + tn)
+
+        if (not fp) and (not tn):
+            fpr = 0
+        else:
+            fpr = fp / (fp + tn)
 
         if (not precision) and (not recall):
             fscore = 0
