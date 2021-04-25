@@ -28,8 +28,6 @@ def main():
                         help="Model to eval folder")
     parser.add_argument("--classifier", default='1h6k',
                         help="Choose classifier architecture")
-    parser.add_argument("--train_path", default='Train_data.hdf5',
-                        help="HDF5 train Dataset path")
     parser.add_argument("--test_path", default='Test_data_v2.hdf5',
                         help="HDF5 test Dataset path")
     parser.add_argument("--batch_size", type=int, default=256,
@@ -38,13 +36,6 @@ def main():
 
     # Select training device
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-    # Train dataset
-    train_set = NpyDataset(args.train_path)
-    train_loader = DataLoader(train_set,
-                              batch_size=args.batch_size,
-                              shuffle=True,
-                              num_workers=8)
 
     # Test dataset
     test_set = NpyDataset(args.test_path)
@@ -65,15 +56,6 @@ def main():
                                    f'{args.model_name}.pth'))
     net.eval()
 
-    # Evaluate model on training dataset
-    evaluate_dataset(train_loader, args.dataset_name + '/Train',
-                     device, net, args.model_name,
-                     args.model_folder,
-                     'Net_outputs')
-
-    train_end = time.time()
-    train_time = train_end - start_time
-
     # Evaluate model on test set
     evaluate_dataset(test_loader, args.dataset_name + '/Test',
                      device, net, args.model_name,
@@ -81,12 +63,9 @@ def main():
                      'Net_outputs')
 
     eval_end = time.time()
-    eval_time = eval_end - train_end
     total_time = eval_end - start_time
 
-    print(f'Training evaluation time: {format_timespan(train_time)}\n'
-          f'Test evaluation time: {format_timespan(eval_time)}\n'
-          f'Total execution time: {format_timespan(total_time)}\n\n'
+    print(f'Total evaluation time: {format_timespan(total_time)}\n\n'
           f'Number of network parameters: {params}')
 
 
