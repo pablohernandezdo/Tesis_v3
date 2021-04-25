@@ -105,6 +105,8 @@ class Results:
         plt.xlabel('Thresholds')
         plt.ylabel('F-score')
         plt.title('Fscores vs Thresholds')
+        plt.xlim(0, 1)
+        plt.ylim(0, 1)
         plt.grid(True)
         plt.savefig(f"Figures/Fscore/{self.dset}/{self.model_name}.png")
         plt.close()
