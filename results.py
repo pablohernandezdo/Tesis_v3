@@ -66,12 +66,12 @@ class Results:
 
         # Evaluation metrics
         if (not tp) and (not fp):
-            precision = 1
+            precision = 0
         else:
             precision = tp / (tp + fp)
 
         if (not tp) and (not fn):
-            recall = 0
+            recall = 1
         else:
             recall = tp / (tp + fn)
 
