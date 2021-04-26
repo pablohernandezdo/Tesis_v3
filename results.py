@@ -71,7 +71,7 @@ class Results:
             precision = tp / (tp + fp)
 
         if (not tp) and (not fn):
-            recall = 1
+            recall = 0
         else:
             recall = tp / (tp + fn)
 
@@ -86,7 +86,7 @@ class Results:
             fscore = (1 + beta ** 2) * (precision * recall) / \
                      ((beta ** 2) * precision + recall)
 
-        return acc, recall, precision, fpr, fscore
+        return acc, precision, recall, fpr, fscore
 
     def save_histogram(self):
         if not os.path.exists(f"Figures/Histogram/{self.dset}"):
