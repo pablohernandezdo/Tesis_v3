@@ -79,24 +79,21 @@ class Dsets:
         return traces, fs
 
 
-class DASDsets(Dsets):
-    def __init__(self):
-        super(DASDsets, self).__init__()
-
-    def save_heatmap(self, clip=None):
-        pass
-
-
 class DatasetFrancia(Dsets):
-    def __init__(self, dataset_path, savepath):
+    def __init__(self, dataset_path, savepath, unproc_savepath):
         super(DatasetFrancia, self).__init__()
 
-        self.savepath = savepath
         self.dataset_path = dataset_path
+        self.savepath = savepath
+        self.unproc_savepath = unproc_savepath
 
         print(f"Reading dataset from path: {self.dataset_path}")
         self.traces = sio.loadmat(self.dataset_path)["StrainFilt"]
         self.fs = 100
+
+        print("Saving npy unprocessed dataset")
+        if not os.path.exists(f'{self.unproc_savepath}/Francia.npy'):
+            self.save_dataset(self.traces, self.unproc_savepath, 'Francia')
 
         print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
@@ -113,14 +110,19 @@ class DatasetFrancia(Dsets):
 
 
 class DatasetNevada(Dsets):
-    def __init__(self, dataset_path, savepath):
+    def __init__(self, dataset_path, savepath, unproc_savepath):
         super(DatasetNevada, self).__init__()
 
-        self.savepath = savepath
         self.dataset_path = dataset_path
+        self.savepath = savepath
+        self.unproc_savepath = unproc_savepath
 
         print(f"Reading dataset from path: {self.dataset_path}")
         self.traces, self.fs = self.read_segy(self.dataset_path)
+
+        print("Saving npy unprocessed dataset")
+        if not os.path.exists(f'{self.unproc_savepath}/Nevada.npy'):
+            self.save_dataset(self.traces, self.unproc_savepath, 'Nevada')
 
         print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
@@ -158,25 +160,32 @@ class DatasetNevada(Dsets):
 
 
 class DatasetBelgica(Dsets):
-    def __init__(self, dataset_path, savepath):
+    def __init__(self, dataset_path, savepath, unproc_savepath):
         super(DatasetBelgica, self).__init__()
-        self.savepath = savepath
+
         self.dataset_path = dataset_path
+        self.savepath = savepath
+        self.unproc_savepath = unproc_savepath
 
         # Belgica lo voy a dejar para el final, mucho webeo entremedio
 
 
 class DatasetReykjanes(Dsets):
-    def __init__(self, dataset_path, savepath):
+    def __init__(self, dataset_path, savepath, unproc_savepath):
         super(DatasetReykjanes, self).__init__()
 
-        self.savepath = savepath
         self.dataset_path = dataset_path
+        self.savepath = savepath
+        self.unproc_savepath = unproc_savepath
         self.fs = 200
         self.n_traces = 2551
 
         print(f"Reading dataset from path: {self.dataset_path}")
         self.header, self.traces = self.read_ascii()
+
+        print("Saving npy unprocessed dataset")
+        if not os.path.exists(f'{self.unproc_savepath}/Reykjanes.npy'):
+            self.save_dataset(self.traces, self.unproc_savepath, 'Reykjanes')
 
         print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
@@ -233,7 +242,7 @@ class DatasetReykjanes(Dsets):
 
 
 class DatasetCalifornia(Dsets):
-    def __init__(self, dataset_paths, savepath):
+    def __init__(self, dataset_paths, savepath, unproc_savepath):
         super(DatasetCalifornia, self).__init__()
 
         if len(dataset_paths) != 4:
@@ -241,6 +250,7 @@ class DatasetCalifornia(Dsets):
 
         else:
             self.savepath = savepath
+            self.unproc_savepath = unproc_savepath
             self.dataset_paths = dataset_paths
             self.fs = 1000
             self.d1, self.d2, self.d3, self.d4 = self.dataset_paths
@@ -250,6 +260,23 @@ class DatasetCalifornia(Dsets):
             self.traces_d2 = sio.loadmat(self.d2)['singdecmatrix'].T
             self.traces_d3 = sio.loadmat(self.d3)['singdecmatrix'].T
             self.traces_d4 = sio.loadmat(self.d4)['singdecmatrix'].T
+
+            print("Saving npy unprocessed datasets")
+            if not os.path.exists(f'{self.unproc_savepath}/California1.npy'):
+                self.save_dataset(self.traces, self.unproc_savepath,
+                                  'California1')
+
+            if not os.path.exists(f'{self.unproc_savepath}/California2.npy'):
+                self.save_dataset(self.traces, self.unproc_savepath,
+                                  'California2')
+
+            if not os.path.exists(f'{self.unproc_savepath}/California3.npy'):
+                self.save_dataset(self.traces, self.unproc_savepath,
+                                  'California3')
+
+            if not os.path.exists(f'{self.unproc_savepath}/California4.npy'):
+                self.save_dataset(self.traces, self.unproc_savepath,
+                                  'California4')
 
             print(f"Preprocessing datasets")
             self.traces_d1 = self.preprocess(self.traces_d1, self.fs)
@@ -287,14 +314,19 @@ class DatasetCalifornia(Dsets):
 
 
 class DatasetHydraulic(Dsets):
-    def __init__(self, dataset_path, savepath):
+    def __init__(self, dataset_path, savepath, unproc_savepath):
         super(DatasetHydraulic, self).__init__()
 
         self.savepath = savepath
+        self.unproc_savepath = unproc_savepath
         self.dataset_path = dataset_path
 
         print(f"Reading dataset from path: {self.dataset_path}")
         self.fs, self.traces = self.read_file()
+
+        print("Saving npy unprocessed dataset")
+        if not os.path.exists(f'{self.unproc_savepath}/Hydraulic.npy'):
+            self.save_dataset(self.traces, self.unproc_savepath, 'Hydraulic')
 
         print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
@@ -323,7 +355,7 @@ class DatasetHydraulic(Dsets):
 
 
 class DatasetVibroseis(Dsets):
-    def __init__(self, dataset_paths, savepath):
+    def __init__(self, dataset_paths, savepath, unproc_savepath):
         super(DatasetVibroseis, self).__init__()
 
         if len(dataset_paths) != 4:
@@ -331,6 +363,7 @@ class DatasetVibroseis(Dsets):
 
         else:
             self.savepath = savepath
+            self.unproc_savepath = unproc_savepath
             self.dataset_paths = dataset_paths
             self.fs = 1000
             self.d1, self.d2, self.d3, self.d4 = self.dataset_paths
@@ -340,6 +373,23 @@ class DatasetVibroseis(Dsets):
             self.traces_d2, _ = self.read_segy(self.d2)
             self.traces_d3, _ = self.read_segy(self.d3)
             self.traces_d4, _ = self.read_segy(self.d4)
+
+            print("Saving npy unprocessed datasets")
+            if not os.path.exists(f'{self.unproc_savepath}/Vibroseis1.npy'):
+                self.save_dataset(self.traces, self.unproc_savepath,
+                                  'Vibroseis1')
+
+            if not os.path.exists(f'{self.unproc_savepath}/Vibroseis2.npy'):
+                self.save_dataset(self.traces, self.unproc_savepath,
+                                  'Vibroseis2')
+
+            if not os.path.exists(f'{self.unproc_savepath}/Vibroseis3.npy'):
+                self.save_dataset(self.traces, self.unproc_savepath,
+                                  'Vibroseis3')
+
+            if not os.path.exists(f'{self.unproc_savepath}/Vibroseis4.npy'):
+                self.save_dataset(self.traces, self.unproc_savepath,
+                                  'Vibroseis4')
 
             print(f"Preprocessing datasets")
             self.traces_d1 = self.preprocess(self.traces_d1, self.fs)
@@ -392,10 +442,11 @@ class DatasetVibroseis(Dsets):
 
 
 class DatasetShaker(Dsets):
-    def __init__(self, dataset_path, savepath):
+    def __init__(self, dataset_path, savepath, unproc_savepath):
         super(DatasetShaker, self).__init__()
 
         self.savepath = savepath
+        self.unproc_savepath = unproc_savepath
         self.dataset_path = dataset_path
 
         print(f"Reading dataset from path: {self.dataset_path}")
@@ -404,6 +455,10 @@ class DatasetShaker(Dsets):
             self.traces = segyio.tools.collect(segy.trace[:])
 
         self.fs = 200
+
+        print("Saving npy unprocessed dataset")
+        if not os.path.exists(f'{self.unproc_savepath}/Shaker.npy'):
+            self.save_dataset(self.traces, self.unproc_savepath, 'Shaker')
 
         print("Preprocessing dataset")
         self.traces = self.preprocess(self.traces, self.fs)
