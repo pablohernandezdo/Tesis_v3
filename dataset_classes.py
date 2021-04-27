@@ -263,19 +263,19 @@ class DatasetCalifornia(Dsets):
 
             print("Saving npy unprocessed datasets")
             if not os.path.exists(f'{self.unproc_savepath}/California1.npy'):
-                self.save_dataset(self.traces, self.unproc_savepath,
+                self.save_dataset(self.traces_d1, self.unproc_savepath,
                                   'California1')
 
             if not os.path.exists(f'{self.unproc_savepath}/California2.npy'):
-                self.save_dataset(self.traces, self.unproc_savepath,
+                self.save_dataset(self.traces_d2, self.unproc_savepath,
                                   'California2')
 
             if not os.path.exists(f'{self.unproc_savepath}/California3.npy'):
-                self.save_dataset(self.traces, self.unproc_savepath,
+                self.save_dataset(self.traces_d3, self.unproc_savepath,
                                   'California3')
 
             if not os.path.exists(f'{self.unproc_savepath}/California4.npy'):
-                self.save_dataset(self.traces, self.unproc_savepath,
+                self.save_dataset(self.traces_d4, self.unproc_savepath,
                                   'California4')
 
             print(f"Preprocessing datasets")
@@ -376,19 +376,19 @@ class DatasetVibroseis(Dsets):
 
             print("Saving npy unprocessed datasets")
             if not os.path.exists(f'{self.unproc_savepath}/Vibroseis1.npy'):
-                self.save_dataset(self.traces, self.unproc_savepath,
+                self.save_dataset(self.traces_d1, self.unproc_savepath,
                                   'Vibroseis1')
 
             if not os.path.exists(f'{self.unproc_savepath}/Vibroseis2.npy'):
-                self.save_dataset(self.traces, self.unproc_savepath,
+                self.save_dataset(self.traces_d2, self.unproc_savepath,
                                   'Vibroseis2')
 
             if not os.path.exists(f'{self.unproc_savepath}/Vibroseis3.npy'):
-                self.save_dataset(self.traces, self.unproc_savepath,
+                self.save_dataset(self.traces_d3, self.unproc_savepath,
                                   'Vibroseis3')
 
             if not os.path.exists(f'{self.unproc_savepath}/Vibroseis4.npy'):
-                self.save_dataset(self.traces, self.unproc_savepath,
+                self.save_dataset(self.traces_d4, self.unproc_savepath,
                                   'Vibroseis4')
 
             print(f"Preprocessing datasets")
