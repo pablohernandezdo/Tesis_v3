@@ -427,6 +427,6 @@ class Npy2NpyTrainReady:
             labels = np.zeros((len(self.traces), 1))
             self.traces = np.hstack([self.traces, labels])
 
-        os.makedirs("Data/TrainReady/", exist_ok=True)
+        os.makedirs("Data/TestReady/", exist_ok=True)
 
-        np.save(f"Data/TrainReady/{self.dataset_name}", self.traces)
+        np.save(f"Data/TestReady/{self.dataset_name}", self.traces)
