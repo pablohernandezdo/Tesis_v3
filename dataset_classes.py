@@ -302,6 +302,19 @@ class DatasetCalifornia(Dsets):
                                      self.traces_d3,
                                      self.traces_d4])
 
+            print(f"Saving npy format individual datasets in {self.savepath}")
+            if not os.path.exists(f'{self.savepath}/California1.npy'):
+                self.save_dataset(self.traces_d1, self.savepath, 'California1')
+
+            if not os.path.exists(f'{self.savepath}/California2.npy'):
+                self.save_dataset(self.traces_d2, self.savepath, 'California2')
+
+            if not os.path.exists(f'{self.savepath}/California3.npy'):
+                self.save_dataset(self.traces_d3, self.savepath, 'California3')
+
+            if not os.path.exists(f'{self.savepath}/California4.npy'):
+                self.save_dataset(self.traces_d4, self.savepath, 'California4')
+
             print(f"Saving npy format dataset in {self.savepath}")
             if not os.path.exists(f'{self.savepath}/California.npy'):
                 self.save_dataset(self.traces, self.savepath, 'California')
@@ -414,6 +427,19 @@ class DatasetVibroseis(Dsets):
                                      self.traces_d2,
                                      self.traces_d3,
                                      self.traces_d4])
+
+            print(f"Saving npy format individual datasets in {self.savepath}")
+            if not os.path.exists(f'{self.savepath}/Vibroseis1.npy'):
+                self.save_dataset(self.traces_d1, self.savepath, 'Vibroseis1')
+
+            if not os.path.exists(f'{self.savepath}/Vibroseis2.npy'):
+                self.save_dataset(self.traces_d2, self.savepath, 'Vibroseis2')
+
+            if not os.path.exists(f'{self.savepath}/Vibroseis3.npy'):
+                self.save_dataset(self.traces_d3, self.savepath, 'Vibroseis3')
+
+            if not os.path.exists(f'{self.savepath}/Vibroseis4.npy'):
+                self.save_dataset(self.traces_d4, self.savepath, 'Vibroseis4')
 
             print(f"Saving npy format dataset in {self.savepath}")
             if not os.path.exists(f'{self.savepath}/Vibroseis.npy'):
