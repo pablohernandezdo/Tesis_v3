@@ -68,6 +68,26 @@ class VisualizerNpy:
         for i in tr_ids:
             self.plot_single_boxplot(i)
 
+    def plot_heatmap(self, csv):
+
+        savepath = f"Figures/Heatmaps/"
+        if not os.path.exists(savepath):
+            os.makedirs(savepath, exist_ok=True)
+
+        df = pd.read_csv(csv)
+
+        # Create matrix of output values as columns
+        extend = np.ones((len(df["out"]), 6000))
+        output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
+
+        plt.figure(figsize=(15, 12))
+        plt.imshow(output_matrix.T, cmap=plt.cm.Greys)
+        plt.colorbar()
+        plt.title(f"Resultados clasificación dataset {self.dataset_name}")
+        plt.xlabel('Canales')
+        plt.ylabel('Valor de salida clasificación')
+        plt.savefig(f"{savepath}/{self.dataset_name}_classification_heatmap.png")
+
 
 class VisualizerHDF5:
     def __init__(self, dataset_path):
@@ -243,23 +263,3 @@ class VisualizerHDF5:
                     plt.grid(True)
                     plt.savefig(f"{savepath}/Boxplot_{i}.png")
                     plt.close()
-
-    def plot_heatmap(self, csv):
-
-        savepath = f"Figures/Heatmaps/"
-        if not os.path.exists(savepath):
-            os.makedirs(savepath, exist_ok=True)
-
-        df = pd.read_csv(csv)
-
-        # Create matrix of output values as columns
-        extend = np.ones((len(df["out"]), 6000))
-        output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
-
-        plt.figure(figsize=(15, 12))
-        plt.imshow(output_matrix.T, cmap=plt.cm.Greys)
-        plt.colorbar()
-        plt.title(f"Resultados clasificación dataset {self.dataset_name}")
-        plt.xlabel('Canales')
-        plt.ylabel('Valor de salida clasificación')
-        plt.savefig(f"{savepath}/{self.dataset_name}_classification_heatmap.png")
