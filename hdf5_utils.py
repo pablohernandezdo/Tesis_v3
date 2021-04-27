@@ -407,3 +407,26 @@ class H52Npy:
 
         np.save(f"Data/TrainReady/{self.dataset_name}.npy",
                 all_tr.astype(np.float16))
+
+
+class Npy2NpyTrainReady:
+    def __init__(self, dataset_path, dataset_type):
+
+        assert dataset_type in ["seismic", "nonseismic"], "Invalid dataset type"
+
+        self.dataset_path = dataset_path
+        self.dataset_name = self.dataset_path.split("/")[-1]
+        self.traces = np.load(self.dataset_path)
+        self.dataset_type = dataset_type
+
+        if self.dataset_type == "seismic":
+            labels = np.ones((len(self.traces), 1))
+            self.traces = np.hstack([self.traces, labels])
+
+        else:
+            labels = np.zeros((len(self.traces), 1))
+            self.traces = np.hstack([self.traces, labels])
+
+        os.makedirs("Data/TrainReady/", exist_ok=True)
+
+        np.save(f"Data/TrainReady/{self.dataset_name}", self.traces)
