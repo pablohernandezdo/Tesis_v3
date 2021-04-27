@@ -68,9 +68,9 @@ class VisualizerNpy:
         for i in tr_ids:
             self.plot_single_boxplot(i)
 
-    def plot_heatmap(self, csv):
+    def plot_heatmap(self, csv, model):
 
-        savepath = f"Figures/Heatmaps/"
+        savepath = f"Figures/Heatmaps/{model}"
         if not os.path.exists(savepath):
             os.makedirs(savepath, exist_ok=True)
 
