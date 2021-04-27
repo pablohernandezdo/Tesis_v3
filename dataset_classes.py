@@ -477,11 +477,11 @@ class DatasetCoompana(Dsets):
 
         print("Normalizing dataset")
         # self.traces = self.normalize(self.traces)
-        self.traces = self.normalize(self.traces[:18000, :])
+        self.traces = self.normalize(self.traces)
 
         print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Coompana.npy'):
-            self.save_dataset(self.traces, self.savepath, 'Coompana')
+            self.save_dataset(self.traces[:18000, :], self.savepath, 'Coompana')
 
     def padd(self):
 
@@ -559,11 +559,11 @@ class DatasetLesser(Dsets):
 
         print("Normalizing dataset")
         # self.traces = self.normalize(self.traces)
-        self.traces = self.normalize(self.traces[:18000, :])
+        self.traces = self.normalize(self.traces)
 
         print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Lesser.npy'):
-            self.save_dataset(self.traces, self.savepath, 'Lesser')
+            self.save_dataset(self.traces[:18000, :], self.savepath, 'Lesser')
 
 
 class DatasetNCAirgun(Dsets):
@@ -589,9 +589,9 @@ class DatasetNCAirgun(Dsets):
 
         print("Normalizing dataset")
         # self.traces = self.normalize(self.traces)
-        self.traces = self.normalize(self.traces[:18000, :])
+        self.traces = self.normalize(self.traces)
 
         print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/NCAirgun.npy'):
-            self.save_dataset(self.traces, self.savepath, 'NCAirgun')
+            self.save_dataset(self.traces[:18000, :], self.savepath, 'NCAirgun')
 
