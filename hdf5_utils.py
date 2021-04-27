@@ -409,7 +409,7 @@ class H52Npy:
                 all_tr.astype(np.float16))
 
 
-class Npy2NpyTrainReady:
+class Npy2TestReady:
     def __init__(self, dataset_path, dataset_type):
 
         assert dataset_type in ["seismic", "nonseismic"], "Invalid dataset type"
