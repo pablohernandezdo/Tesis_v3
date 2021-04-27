@@ -80,8 +80,11 @@ def evaluate_dataset(dset_npy, dataset_name, device, net,
         with torch.no_grad():
             for data in dset_npy:
 
-                traces, labels = data[:6000].astype(np.float32).to(device),\
-                                 data[-1].astype(np.float32).to(device)
+                trace = torch.from_numpy(data[:6000].astype(np.float32))
+                label = torch.from_numpy(data[-1].astype(np.float32))
+
+                trace.to(device)
+                label.to(device)
 
                 outputs = net(traces)
 
