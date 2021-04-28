@@ -282,7 +282,7 @@ class VizUnprocessed:
         self.clip_traces = self.clip_traces.astype('uint8') * 255
 
         if not os.path.exists(f"Figures/Unprocessed"):
-            os.makedirs(f"Figures/Unprocessed}",
+            os.makedirs(f"Figures/Unprocessed",
                         exist_ok=True)
 
         cv2.imwrite(f"Figures/Unprocessed/{self.dataset_name}.png",
