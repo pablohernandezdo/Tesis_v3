@@ -396,8 +396,8 @@ class H52Npy:
                 tr = nonseis_grp[dset][:]
                 nonseis_trs.append(np.hstack([tr, label]))
 
-        seis_trs = np.asarray(seis_trs, dtype=np.float16)
-        nonseis_trs = np.asarray(nonseis_trs, dtype=np.float16)
+        seis_trs = np.asarray(seis_trs, dtype=np.float32)
+        nonseis_trs = np.asarray(nonseis_trs, dtype=np.float32)
 
         if seis_trs.size == 0:
             all_tr = nonseis_trs
@@ -410,13 +410,13 @@ class H52Npy:
             os.makedirs("Data/TrainReady/", exist_ok=True)
 
             np.save(f"Data/TrainReady/{self.dataset_name}.npy",
-                    all_tr.astype(np.float16))
+                    all_tr.astype(np.float32))
 
         else:
             os.makedirs("Data/TestReady/", exist_ok=True)
 
             np.save(f"Data/TestReady/{self.dataset_name}.npy",
-                    all_tr.astype(np.float16))
+                    all_tr.astype(np.float32))
 
 
 class Npy2TestReady:
