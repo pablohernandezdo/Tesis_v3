@@ -38,7 +38,7 @@ class Comp:
         self.best_fscore1 = np.amax(self.fscore1)
         self.best_fscore2 = np.amax(self.fscore2)
 
-        # self.save_histogram() Como podria guardar los dos histogramas juntos?
+        self.save_histogram()
         self.save_fsc()
         self.save_pr()
         self.save_roc()
@@ -107,14 +107,22 @@ class Comp:
             os.makedirs(f"Comps/Histogram/{self.dset}", exist_ok=True)
 
         plt.figure(figsize=(12, 9))
+        plt.subplot(2, 1, 1)
         plt.hist(self.df1[self.df1['label'] == 1]['out'], 100)
-        plt.hist(self.df1[self.df1['label'] == 0]['out'], 100)
-        plt.title(f'Output values histogram')
+        plt.title(f'Output values histogram {self.model1_name}')
         plt.xlabel('Output values')
         plt.ylabel('Counts')
         plt.legend(['positive', 'negative'], loc='upper left')
         plt.grid(True)
-        plt.savefig(f"Figures/Histogram/{self.dset}/{self.model_name}.png")
+        plt.subplot(2, 1, 2)
+        plt.hist(self.df2[self.df2['label'] == 0]['out'], 100)
+        plt.title(f'Output values histogram {self.model2_name}')
+        plt.xlabel('Output values')
+        plt.ylabel('Counts')
+        plt.legend(['positive', 'negative'], loc='upper left')
+        plt.grid(True)
+        plt.savefig(f"Figures/Histogram/{self.dset}/"
+                    f"Comp_{self.model1_name}_{self.model2_name}.png")
         plt.close()
 
     def save_fsc(self):
