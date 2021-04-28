@@ -270,7 +270,7 @@ class VizUnprocessed:
     def __init__(self, dataset_path, clip=None):
 
         self.dataset_path = dataset_path
-        self.dataset_name = self.dataset_path.split("/")[-1]
+        self.dataset_name = self.dataset_path.split("/")[-1].split(".")[0]
         self.clip = clip
 
         self.dataset = np.load(self.dataset_path)
@@ -281,8 +281,8 @@ class VizUnprocessed:
         self.clip_traces = np.abs(self.clip_traces)
         self.clip_traces = self.clip_traces.astype('uint8') * 255
 
-        if not os.path.exists(f"Figures/Unprocessed/{self.dataset_name}"):
-            os.makedirs(f"Figures/Unprocessed/{self.dataset_name}",
+        if not os.path.exists(f"Figures/Unprocessed"):
+            os.makedirs(f"Figures/Unprocessed}",
                         exist_ok=True)
 
         cv2.imwrite(f"Figures/Unprocessed/{self.dataset_name}.png",
