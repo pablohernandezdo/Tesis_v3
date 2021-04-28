@@ -275,7 +275,7 @@ class VizUnprocessed:
 
         self.dataset = np.load(self.dataset_path)
 
-        self.clip_traces = np.zeros(self.traces.shape)
+        self.clip_traces = np.zeros(self.dataset.shape)
         np.clip(self.clip_traces, -self.clip, self.clip, out=self.clip_traces)
 
         self.clip_traces = np.abs(self.clip_traces)
