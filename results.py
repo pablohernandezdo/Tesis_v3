@@ -93,8 +93,8 @@ class Results:
             os.makedirs(f"Figures/Histogram/{self.dset}", exist_ok=True)
 
         plt.figure(figsize=(12, 9))
-        plt.hist(self.df[self.df['label'] == 1]['out'], 100)
-        plt.hist(self.df[self.df['label'] == 0]['out'], 100)
+        plt.hist(self.df[self.df['label'] == 1]['out'], 100, alpha=0.5)
+        plt.hist(self.df[self.df['label'] == 0]['out'], 100, alpha=0.5)
         plt.title(f'Output values histogram')
         plt.xlabel('Output values')
         plt.ylabel('Counts')
