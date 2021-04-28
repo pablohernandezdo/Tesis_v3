@@ -365,13 +365,16 @@ class H5Info:
 class H52Npy:
     """
     Crear dataset de entrenamiento npy desde dataset hdf5, para probar
-    velocidad de entrenamineto/prueba
+    velocidad de entrenamiento/prueba
     """
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, dset_type):
 
         name = dataset_path.split("/")[-1]
         self. dataset_path = dataset_path
         self.dataset_name = name.split("hdf5")[0][:-1]
+        self.dset_type = dset_type
+
+        assert self.dset_type in ["train", "test"], "Invalid dataset type!"
 
         with h5py.File(self.dataset_path, "r") as h5:
 
@@ -403,10 +406,17 @@ class H52Npy:
         else:
             all_tr = np.vstack([seis_trs, nonseis_trs])
 
-        os.makedirs("Data/TrainReady/", exist_ok=True)
+        if dset_type == "train":
+            os.makedirs("Data/TrainReady/", exist_ok=True)
 
-        np.save(f"Data/TrainReady/{self.dataset_name}.npy",
-                all_tr.astype(np.float16))
+            np.save(f"Data/TrainReady/{self.dataset_name}.npy",
+                    all_tr.astype(np.float16))
+
+        else:
+            os.makedirs("Data/TestReady/", exist_ok=True)
+
+            np.save(f"Data/TestReady/{self.dataset_name}.npy",
+                    all_tr.astype(np.float16))
 
 
 class Npy2TestReady:
