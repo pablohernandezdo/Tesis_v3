@@ -93,7 +93,7 @@ class Comp:
             fscore = (1 + beta ** 2) * (precision * recall) / \
                      ((beta ** 2) * precision + recall)
 
-        return acc, recall, precision, fpr, fscore
+        return acc, precision, recall, fpr, fscore
 
     @staticmethod
     def get_aucs(precision, recall, fpr):
