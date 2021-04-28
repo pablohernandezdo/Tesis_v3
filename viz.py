@@ -1,4 +1,5 @@
 import os
+import cv2
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
@@ -263,3 +264,27 @@ class VisualizerHDF5:
                     plt.grid(True)
                     plt.savefig(f"{savepath}/Boxplot_{i}.png")
                     plt.close()
+
+
+class VizUnprocessed:
+    def __init__(self, dataset_path, clip=None):
+
+        self.dataset_path = dataset_path
+        self.dataset_name = self.dataset_path.split("/")[-1]
+        self.clip = clip
+
+        self.dataset = np.load(self.dataset_path)
+
+        self.clip_traces = np.zeros(self.traces.shape)
+        np.clip(self.clip_traces, -self.clip, self.clip, out=self.clip_traces)
+
+        self.clip_traces = np.abs(self.clip_traces)
+        self.clip_traces = self.clip_traces.astype('uint8') * 255
+
+        if not os.path.exists(f"Figures/Unprocessed/{self.dataset_name}"):
+            os.makedirs(f"Figures/Unprocessed/{self.dataset_name}",
+                        exist_ok=True)
+
+        cv2.imwrite(f"Figures/Unprocessed/{self.dataset_name}.png",
+                    self.clip_traces.T)
+
