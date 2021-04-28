@@ -121,7 +121,7 @@ class Comp:
         plt.ylabel('Counts')
         plt.legend(['positive', 'negative'], loc='upper left')
         plt.grid(True)
-        plt.savefig(f"Figures/Histogram/{self.dset}/"
+        plt.savefig(f"Comp/Histogram/{self.dset}/"
                     f"Comp_{self.model1_name}_{self.model2_name}.png")
         plt.close()
 
