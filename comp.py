@@ -103,8 +103,8 @@ class Comp:
         return pr_auc, roc_auc
 
     def save_histogram(self):
-        if not os.path.exists(f"Comps/Histogram/{self.dset}"):
-            os.makedirs(f"Comps/Histogram/{self.dset}", exist_ok=True)
+        if not os.path.exists(f"Comp/Histogram/{self.dset}"):
+            os.makedirs(f"Comp/Histogram/{self.dset}", exist_ok=True)
 
         plt.figure(figsize=(12, 9))
         plt.subplot(2, 1, 1)
