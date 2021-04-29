@@ -25,7 +25,7 @@ class VisualizerNpy:
         if not os.path.exists(savepath):
             os.makedirs(savepath, exist_ok=True)
 
-        plt.figure(figsize=(12, 9))
+        plt.figure(figsize=(20, 20))
         plt.plot(self.dataset[idx_tr])
         plt.title(f'Dataset {self.dataset_name}, trace number {idx_tr}')
         plt.xlabel('Samples')
@@ -54,7 +54,7 @@ class VisualizerNpy:
 
         trace = self.dataset[idx_tr].reshape(10, -1)
 
-        plt.figure(figsize=(12, 9))
+        plt.figure(figsize=(20, 20))
         plt.boxplot(trace.T)
         plt.title(f'Dataset {self.dataset_name}, trace number {idx_tr} boxplot')
         plt.savefig(f"{savepath}/Boxplot_{idx_tr}.png")
@@ -102,7 +102,7 @@ class VisualizerHDF5:
         if tr_type == "seismic":
             for i, tr in enumerate(self.seis_grp):
                 if i == idx_tr:
-                    plt.figure(figsize=(12, 9))
+                    plt.figure(figsize=(20, 20))
                     plt.plot(self.seis_grp[tr][:])
                     plt.title(f'Dataset {self.dataset_name},'
                               f' trace number {idx_tr}')
@@ -115,7 +115,7 @@ class VisualizerHDF5:
         else:
             for i, tr in enumerate(self.nonseis_grp):
                 if i == idx_tr:
-                    plt.figure(figsize=(12, 9))
+                    plt.figure(figsize=(20, 20))
                     plt.plot(self.nonseis_grp[tr][:])
                     plt.title(f'Dataset {self.dataset_name},'
                               f' trace number {idx_tr}')
@@ -145,7 +145,7 @@ class VisualizerHDF5:
         if tr_type == "seismic":
             for i, tr in enumerate(self.seis_grp):
                 if i in tr_ids:
-                    plt.figure(figsize=(12, 9))
+                    plt.figure(figsize=(20, 20))
                     plt.plot(self.seis_grp[tr][:])
                     plt.title(f'Dataset {self.dataset_name},'
                               f' trace number {i}')
@@ -158,7 +158,7 @@ class VisualizerHDF5:
         else:
             for i, tr in enumerate(self.nonseis_grp):
                 if i in tr_ids:
-                    plt.figure(figsize=(12, 9))
+                    plt.figure(figsize=(20, 20))
                     plt.plot(self.nonseis_grp[tr][:])
                     plt.title(f'Dataset {self.dataset_name},'
                               f' trace number {i}')
@@ -184,7 +184,7 @@ class VisualizerHDF5:
             for i, tr in enumerate(self.seis_grp):
                 if i == idx_tr:
                     tr = self.seis_grp[tr][:].reshape(10, -1)
-                    plt.figure(figsize=(12, 9))
+                    plt.figure(figsize=(20, 20))
                     plt.boxplot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
                               f' boxplot number {idx_tr}')
@@ -195,7 +195,7 @@ class VisualizerHDF5:
             for i, tr in enumerate(self.nonseis_grp):
                 if i == idx_tr:
                     tr = self.nonseis_grp[tr][:].reshape(10, -1)
-                    plt.figure(figsize=(12, 9))
+                    plt.figure(figsize=(20, 20))
                     plt.boxplot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
                               f' boxplot number {idx_tr}')
@@ -223,7 +223,7 @@ class VisualizerHDF5:
             for i, tr in enumerate(self.seis_grp):
                 if i in tr_ids:
                     tr = self.seis_grp[tr][:].reshape(10, -1)
-                    plt.figure(figsize=(12, 9))
+                    plt.figure(figsize=(20, 20))
                     plt.boxplot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
                               f' boxplot number {i}')
@@ -234,7 +234,7 @@ class VisualizerHDF5:
             for i, tr in enumerate(self.nonseis_grp):
                 if i in tr_ids:
                     tr = self.nonseis_grp[tr][:].reshape(10, -1)
-                    plt.figure(figsize=(12, 9))
+                    plt.figure(figsize=(20, 20))
                     plt.boxplot(tr.T)
                     plt.title(f'Dataset {self.dataset_name},'
                               f' boxplot number {i}')
@@ -264,7 +264,7 @@ class VizUnprocessed:
                    f"{self.dataset_name}"
         os.makedirs(savepath, exist_ok=True)
 
-        plt.figure(figsize=(15, 12))
+        plt.figure(figsize=(20, 20))
         plt.imshow(clip_traces.T, cmap=plt.cm.seismic, aspect='auto')
         plt.colorbar()
         plt.savefig(f"{savepath}/"
@@ -288,7 +288,7 @@ class VizUnprocessed:
         extend = np.ones((len(df["out"]), 6000))
         output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
 
-        plt.figure(figsize=(15, 12))
+        plt.figure(figsize=(20, 20))
         plt.imshow(output_matrix.T, cmap=plt.cm.Greys, aspect='auto')
         plt.colorbar()
         plt.title(f"Resultados clasificación dataset {self.dataset_name}")
@@ -346,7 +346,7 @@ class VizUnprocessed:
                    f"{self.dataset_name}"
         os.makedirs(savepath, exist_ok=True)
 
-        plt.figure(figsize=(15, 12))
+        plt.figure(figsize=(20, 20))
         plt.imshow(clip_traces.T, cmap=plt.cm.seismic, aspect='auto')
         plt.colorbar()
         plt.imshow(output_matrix.T * 255, cmap=plt.cm.Greys,
