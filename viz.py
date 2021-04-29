@@ -266,6 +266,7 @@ class VizUnprocessed:
 
         plt.figure(figsize=(15, 12))
         plt.imshow(clip_traces.T, cmap=plt.cm.seismic, aspect='auto')
+        plt.colorbar()
         plt.savefig(f"{savepath}/"
                     f"{self.dataset_name}_clip_{self.clip}.png")
         plt.close()
