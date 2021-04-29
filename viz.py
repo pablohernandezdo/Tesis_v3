@@ -289,7 +289,7 @@ class VizUnprocessed:
         output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
 
         plt.figure(figsize=(15, 12))
-        plt.imshow(output_matrix.T, cmap=plt.cm.Greys)
+        plt.imshow(output_matrix.T, cmap=plt.cm.Greys, aspect='auto')
         plt.colorbar()
         plt.title(f"Resultados clasificación dataset {self.dataset_name}")
         plt.xlabel('Canales')
@@ -347,9 +347,10 @@ class VizUnprocessed:
         os.makedirs(savepath, exist_ok=True)
 
         plt.figure(figsize=(15, 12))
-        plt.imshow(clip_traces.T, cmap=plt.cm.seismic)
+        plt.imshow(clip_traces.T, cmap=plt.cm.seismic, aspect='auto')
         plt.colorbar()
-        plt.imshow(output_matrix.T * 255, cmap=plt.cm.Greys, alpha=0.4)
+        plt.imshow(output_matrix.T * 255, cmap=plt.cm.Greys,
+                   alpha=0.4, aspect='auto')
         plt.title(f"Dataset {self.dataset_name},"
                   f" resultados modelo {model}")
         plt.xlabel("Canales")
