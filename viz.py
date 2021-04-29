@@ -332,7 +332,7 @@ class VizUnprocessed:
 
         if self.clip:
             clip_traces = np.clip(unproc, -self.clip, self.clip)
-            clip_traces = (clip_traces / np.amax(np.abs(clip_traces))).astype('uint8') * 255
+            clip_traces = (clip_traces / np.amax(np.abs(clip_traces)))
 
         # Output_matrix
         df = pd.read_csv(csv)
@@ -346,7 +346,7 @@ class VizUnprocessed:
         os.makedirs(savepath, exist_ok=True)
 
         plt.figure(figsize=(15, 12))
-        plt.imshow(clip_traces.T, cmap=plt.cm.hot)
+        plt.imshow(clip_traces.T, cmap=plt.cm.seismic)
         plt.colorbar()
         plt.imshow(output_matrix.T * 255, cmap=plt.cm.Greys, alpha=0.4)
         plt.title(f"Dataset {self.dataset_name},"
