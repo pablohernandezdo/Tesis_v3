@@ -271,9 +271,9 @@ class VizUnprocessed:
                     f"{self.dataset_name}_clip_{self.clip}.png")
         plt.close()
 
-        # plt.imsave(f"{savepath}/"
-        #            f"{self.dataset_name}_full_clip_{self.clip}.png",
-        #            clip_traces.T, cmap=plt.cm.seismic)
+        plt.imsave(f"{savepath}/"
+                   f"{self.dataset_name}_full_clip_{self.clip}.png",
+                   clip_traces.T, cmap=plt.cm.seismic)
 
     def plot_class_result(self, csv, model):
 
