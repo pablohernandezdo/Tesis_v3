@@ -19,7 +19,7 @@ class VisualizerNpy:
 
     def plot_single_trace(self, idx_tr):
 
-        assert(idx_tr < len(self.dataset)), "Invalid trace number!"
+        assert (idx_tr < len(self.dataset)), "Invalid trace number!"
 
         savepath = f"Figures/Datasets/{self.dataset_name}/Traces"
 
@@ -77,7 +77,7 @@ class VisualizerHDF5:
         self.dataset_name = self.dataset_path.split("/")[-1]
         self.dset_extension = self.dataset_path.split(".")[-1]
 
-        assert self.dset_extension in ["hdf5", "HDF5"],\
+        assert self.dset_extension in ["hdf5", "HDF5"], \
             "Dataset format must be HDF5!"
 
         self.dataset = h5py.File(self.dataset_path, "r")
@@ -271,9 +271,9 @@ class VizUnprocessed:
                     f"{self.dataset_name}_clip_{self.clip}.png")
         plt.close()
 
-        plt.imsave(f"{savepath}/"
-               f"{self.dataset_name}_full_clip_{self.clip}.png",
-               clip_traces.T, cmap=plt.cm.seismic)
+        # plt.imsave(f"{savepath}/"
+        #            f"{self.dataset_name}_full_clip_{self.clip}.png",
+        #            clip_traces.T, cmap=plt.cm.seismic)
 
     def plot_class_result(self, csv, model):
 
@@ -299,8 +299,8 @@ class VizUnprocessed:
         plt.close()
 
         plt.imsave(f"{savepath}/{self.dataset_name}"
-               f"_{model}_full_classification.png",
-               output_matrix.T, cmap=plt.cm.Greys)
+                   f"_{model}_full_classification.png",
+                   output_matrix.T, cmap=plt.cm.Greys)
 
     def plot_class_heatmap(self, csv, model):
 
@@ -357,4 +357,3 @@ class VizUnprocessed:
         plt.savefig(f"{savepath}/{self.dataset_name}_{model}_"
                     f"superimposed.png", facecolor='white')
         plt.close()
-
