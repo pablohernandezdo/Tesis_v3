@@ -278,14 +278,6 @@ class DatasetCalifornia(Dsets):
                 self.save_dataset(self.traces_d4, self.unproc_savepath,
                                   'California4')
 
-            if not os.path.exists(f'{self.unproc_savepath}/California.npy'):
-                self.save_dataset(np.vstack([self.traces_d1,
-                                             self.traces_d2,
-                                             self.traces_d3,
-                                             self.traces_d4]),
-                                  self.unproc_savepath,
-                                  'California')
-
             print(f"Preprocessing datasets")
             self.traces_d1 = self.preprocess(self.traces_d1, self.fs)
             self.traces_d2 = self.preprocess(self.traces_d2, self.fs)
@@ -411,14 +403,6 @@ class DatasetVibroseis(Dsets):
             if not os.path.exists(f'{self.unproc_savepath}/Vibroseis4.npy'):
                 self.save_dataset(self.traces_d4, self.unproc_savepath,
                                   'Vibroseis4')
-
-            if not os.path.exists(f'{self.unproc_savepath}/Vibroseis.npy'):
-                self.save_dataset(np.vstack([self.traces_d1,
-                                             self.traces_d2,
-                                             self.traces_d3,
-                                             self.traces_d4]),
-                                  self.unproc_savepath,
-                                  'Vibroseis')
 
             print(f"Preprocessing datasets")
             self.traces_d1 = self.preprocess(self.traces_d1, self.fs)
