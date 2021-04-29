@@ -265,15 +265,15 @@ class VizUnprocessed:
                    f"{self.dataset_name}"
         os.makedirs(savepath, exist_ok=True)
 
-        plt.imsave(f"{savepath}/"
-                   f"{self.dataset_name}_full_clip_{self.clip}.png",
-                   clip_traces.T, cmap=plt.cm.seismic)
-
         plt.figure(figsize=(15, 12))
         plt.imshow(clip_traces.T, cmap=plt.cm.seismic)
         plt.savefig(f"{savepath}/"
                     f"{self.dataset_name}_clip_{self.clip}.png")
         plt.close()
+
+        plt.imsave(f"{savepath}/"
+               f"{self.dataset_name}_full_clip_{self.clip}.png",
+               clip_traces.T, cmap=plt.cm.seismic)
 
     def plot_class_result(self, csv, model):
 
@@ -287,10 +287,6 @@ class VizUnprocessed:
         extend = np.ones((len(df["out"]), 6000))
         output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
 
-        plt.imsave(f"{savepath}/{self.dataset_name}"
-                   f"_{model}_full_classification.png",
-                   output_matrix.T, cmap=plt.cm.Greys)
-
         plt.figure(figsize=(15, 12))
         plt.imshow(output_matrix.T, cmap=plt.cm.Greys)
         plt.colorbar()
@@ -301,6 +297,10 @@ class VizUnprocessed:
                     f"{self.dataset_name}"
                     f"_{model}_classification.png")
         plt.close()
+
+        plt.imsave(f"{savepath}/{self.dataset_name}"
+               f"_{model}_full_classification.png",
+               output_matrix.T, cmap=plt.cm.Greys)
 
     def plot_class_heatmap(self, csv, model):
 
