@@ -276,7 +276,8 @@ class VizUnprocessed:
 
     def plot_class_result(self, csv, model):
 
-        savepath = f"Figures/Classification/Outputs/{model}"
+        savepath = f"Figures/Classification/Outputs/" \
+                   f"{self.dataset_name}"
         if not os.path.exists(savepath):
             os.makedirs(savepath, exist_ok=True)
 
@@ -293,8 +294,7 @@ class VizUnprocessed:
         plt.xlabel('Canales')
         plt.ylabel('Valor de salida clasificación')
         plt.savefig(f"{savepath}/"
-                    f"{self.dataset_name}"
-                    f"_{model}_classification.png")
+                    f"{model}_classification.png")
         plt.close()
 
         plt.imsave(f"{savepath}/{self.dataset_name}"
