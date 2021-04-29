@@ -69,111 +69,6 @@ class VisualizerNpy:
         for i in tr_ids:
             self.plot_single_boxplot(i)
 
-    def plot_heatmap(self, unprocessed_path, clip=None):
-
-        unproc = np.load(unprocessed_path)
-        clip_traces = np.zeros(unproc.shape)
-
-        if clip:
-            clip_traces = np.clip(unproc, -clip, clip)
-
-        savepath = f"Figures/Classification/Heatmaps/" \
-                   f"{self.dataset_name.split('.')[0]}"
-        os.makedirs(savepath, exist_ok=True)
-
-        plt.imsave(f"{savepath}/"
-                   f"{self.dataset_name.split('.')[0]}_full_clip_{clip}.png",
-                   clip_traces.T, cmap=plt.cm.seismic)
-
-        plt.figure(figsize=(15, 12))
-        plt.imshow(clip_traces.T, cmap=plt.cm.seismic)
-        plt.savefig(f"{savepath}/"
-                    f"{self.dataset_name.split('.')[0]}_clip_{clip}.png")
-        plt.close()
-
-    def plot_class_result(self, csv, model):
-
-        savepath = f"Figures/Classification/Outputs/{model}"
-        if not os.path.exists(savepath):
-            os.makedirs(savepath, exist_ok=True)
-
-        df = pd.read_csv(csv)
-
-        # Create matrix of output values as columns
-        extend = np.ones((len(df["out"]), 6000))
-        output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
-
-        plt.imsave(f"{savepath}/{self.dataset_name.split('.')[0]}"
-                   f"_{model}_full_classification.png",
-                   output_matrix.T, cmap=plt.cm.Greys)
-
-        plt.figure(figsize=(15, 12))
-        plt.imshow(output_matrix.T, cmap=plt.cm.Greys)
-        plt.colorbar()
-        plt.title(f"Resultados clasificación dataset "
-                  f"{self.dataset_name.split('.')[0]}")
-        plt.xlabel('Canales')
-        plt.ylabel('Valor de salida clasificación')
-        plt.savefig(f"{savepath}/"
-                    f"{self.dataset_name.split('.')[0]}"
-                    f"_{model}_classification.png")
-
-    def plot_class_heatmap(self, unprocessed_path, csv, model, clip=None):
-
-        # Clip traces
-        unproc = np.load(unprocessed_path)
-        clip_traces = np.zeros(unproc.shape)
-
-        if clip:
-            clip_traces = np.clip(unproc, -clip, clip)
-            clip_traces = (clip_traces / clip).astype('uint8') * 255
-
-        # Output_matrix
-        df = pd.read_csv(csv)
-
-        # Create matrix of output values as columns
-        extend = np.ones((len(df["out"]), 6000))
-        output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
-
-        savepath = f"Figures/Classification/Heatmaps+Outputs/" \
-                   f"{self.dataset_name.split('.')[0]}/{model}"
-        os.makedirs(savepath, exist_ok=True)
-
-        both = np.hstack([clip_traces, output_matrix * 255])
-
-    def plot_class_heatmap_superimposed(self, unprocessed_path,
-                                        csv, model, clip=None):
-
-        # Clip traces
-        unproc = np.load(unprocessed_path)
-        clip_traces = np.zeros(unproc.shape)
-
-        if clip:
-            clip_traces = np.clip(unproc, -clip, clip)
-            clip_traces = (clip_traces / clip).astype('uint8') * 255
-
-        # Output_matrix
-        df = pd.read_csv(csv)
-
-        # Create matrix of output values as columns
-        extend = np.ones((len(df["out"]), 6000))
-        output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
-
-        savepath = f"Figures/Classification/Superimposed/" \
-                   f"{self.dataset_name.split('.')[0]}/{model}"
-        os.makedirs(savepath, exist_ok=True)
-
-        plt.figure(figsize=(15, 12))
-        plt.imshow(clip_traces.T, cmap=plt.cm.hot)
-        plt.colorbar()
-        plt.imshow(output_matrix.T * 255, cmap=plt.cm.Greys, alpha=0.4)
-        plt.title(f"Dataset {self.dataset_name.split('.')[0]},"
-                  f" resultados modelo {model}")
-        plt.xlabel("Canales")
-        plt.ylabel("Muestras de cada señal")
-        plt.savefig(f"{savepath}/{self.dataset_name.split('.')[0]}_{model}_"
-                    f"superimposed.png", facecolor='white')
-
 
 class VisualizerHDF5:
     def __init__(self, dataset_path):
@@ -358,18 +253,108 @@ class VizUnprocessed:
         self.dataset_name = self.dataset_path.split("/")[-1].split(".")[0]
         self.clip = clip
 
-        self.dataset = np.load(self.dataset_path)
+    def plot_heatmap(self):
 
-        self.clip_traces = np.zeros(self.dataset.shape)
-        np.clip(self.clip_traces, -self.clip, self.clip, out=self.clip_traces)
+        unproc = np.load(self.dataset_path)
+        clip_traces = np.zeros(unproc.shape)
 
-        self.clip_traces = np.abs(self.clip_traces)
-        self.clip_traces = self.clip_traces.astype('uint8') * 255
+        if self.clip:
+            clip_traces = np.clip(unproc, -self.clip, self.clip)
 
-        if not os.path.exists(f"Figures/Unprocessed"):
-            os.makedirs(f"Figures/Unprocessed",
-                        exist_ok=True)
+        savepath = f"Figures/Classification/Heatmaps/" \
+                   f"{self.dataset_name}"
+        os.makedirs(savepath, exist_ok=True)
 
-        cv2.imwrite(f"Figures/Unprocessed/{self.dataset_name}.png",
-                    self.clip_traces.T)
+        plt.imsave(f"{savepath}/"
+                   f"{self.dataset_name}_full_clip_{self.clip}.png",
+                   clip_traces.T, cmap=plt.cm.seismic)
+
+        plt.figure(figsize=(15, 12))
+        plt.imshow(clip_traces.T, cmap=plt.cm.seismic)
+        plt.savefig(f"{savepath}/"
+                    f"{self.dataset_name}_clip_{self.clip}.png")
+        plt.close()
+
+    def plot_class_result(self, csv, model):
+
+        savepath = f"Figures/Classification/Outputs/{model}"
+        if not os.path.exists(savepath):
+            os.makedirs(savepath, exist_ok=True)
+
+        df = pd.read_csv(csv)
+
+        # Create matrix of output values as columns
+        extend = np.ones((len(df["out"]), 6000))
+        output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
+
+        plt.imsave(f"{savepath}/{self.dataset_name}"
+                   f"_{model}_full_classification.png",
+                   output_matrix.T, cmap=plt.cm.Greys)
+
+        plt.figure(figsize=(15, 12))
+        plt.imshow(output_matrix.T, cmap=plt.cm.Greys)
+        plt.colorbar()
+        plt.title(f"Resultados clasificación dataset {self.dataset_name}")
+        plt.xlabel('Canales')
+        plt.ylabel('Valor de salida clasificación')
+        plt.savefig(f"{savepath}/"
+                    f"{self.dataset_name}"
+                    f"_{model}_classification.png")
+        plt.close()
+
+    def plot_class_heatmap(self, csv, model):
+
+        # Clip traces
+        unproc = np.load(self.dataset_path)
+        clip_traces = np.zeros(unproc.shape)
+
+        if self.clip:
+            clip_traces = np.clip(unproc, -self.clip, self.clip)
+            clip_traces = (clip_traces / self.clip).astype('uint8') * 255
+
+        # Output_matrix
+        df = pd.read_csv(csv)
+
+        # Create matrix of output values as columns
+        extend = np.ones((len(df["out"]), 6000))
+        output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
+
+        savepath = f"Figures/Classification/Heatmaps+Outputs/" \
+                   f"{self.dataset_name}/{model}"
+        os.makedirs(savepath, exist_ok=True)
+
+        both = np.hstack([clip_traces, output_matrix * 255])
+
+    def plot_class_heatmap_superimposed(self, csv, model):
+
+        # Clip traces
+        unproc = np.load(self.dataset_path)
+        clip_traces = np.zeros(unproc.shape)
+
+        if self.clip:
+            clip_traces = np.clip(unproc, -self.clip, self.clip)
+            clip_traces = (clip_traces / self.clip).astype('uint8') * 255
+
+        # Output_matrix
+        df = pd.read_csv(csv)
+
+        # Create matrix of output values as columns
+        extend = np.ones((len(df["out"]), 6000))
+        output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
+
+        savepath = f"Figures/Classification/Superimposed/" \
+                   f"{self.dataset_name}/{model}"
+        os.makedirs(savepath, exist_ok=True)
+
+        plt.figure(figsize=(15, 12))
+        plt.imshow(clip_traces.T, cmap=plt.cm.hot)
+        plt.colorbar()
+        plt.imshow(output_matrix.T * 255, cmap=plt.cm.Greys, alpha=0.4)
+        plt.title(f"Dataset {self.dataset_name},"
+                  f" resultados modelo {model}")
+        plt.xlabel("Canales")
+        plt.ylabel("Muestras de cada señal")
+        plt.savefig(f"{savepath}/{self.dataset_name}_{model}_"
+                    f"superimposed.png", facecolor='white')
+        plt.close()
 
