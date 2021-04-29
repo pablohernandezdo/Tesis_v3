@@ -243,7 +243,7 @@ def learning_curve_acc(tr_acc, val_acc, savepath, model_name):
     if not os.path.exists(savepath):
         os.makedirs(savepath, exist_ok=True)
 
-    plt.figure()
+    plt.figure(figsize=(15, 12))
     line_tr, = plt.plot(tr_acc, label='Training accuracy')
     line_val, = plt.plot(val_acc, label='Validation accuracy')
     plt.grid(True)
@@ -259,7 +259,7 @@ def learning_curve_loss(tr_loss, val_loss, savepath, model_name):
     if not os.path.exists(savepath):
         os.makedirs(savepath, exist_ok=True)
 
-    plt.figure()
+    plt.figure(figsize=(15, 12))
     line_tr, = plt.plot(tr_loss, label='Training Loss')
     line_val, = plt.plot(val_loss, label='Validation Loss')
     plt.grid(True)
