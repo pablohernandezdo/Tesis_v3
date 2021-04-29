@@ -342,7 +342,7 @@ class VizUnprocessed:
         output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
 
         savepath = f"Figures/Classification/Superimposed/" \
-                   f"{self.dataset_name}/{model}"
+                   f"{self.dataset_name}"
         os.makedirs(savepath, exist_ok=True)
 
         plt.figure(figsize=(15, 12))
@@ -353,6 +353,5 @@ class VizUnprocessed:
                   f" resultados modelo {model}")
         plt.xlabel("Canales")
         plt.ylabel("Muestras de cada señal")
-        plt.savefig(f"{savepath}/{self.dataset_name}_{model}_"
-                    f"superimposed.png", facecolor='white')
+        plt.savefig(f"{savepath}/{model}_superimposed.png", facecolor='white')
         plt.close()
