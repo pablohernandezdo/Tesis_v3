@@ -1,5 +1,4 @@
 import os
-import cv2
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
@@ -333,7 +332,7 @@ class VizUnprocessed:
 
         if self.clip:
             clip_traces = np.clip(unproc, -self.clip, self.clip)
-            clip_traces = (clip_traces / self.clip).astype('uint8') * 255
+            clip_traces = (clip_traces / np.amax(np.abs(clip_traces))).astype('uint8') * 255
 
         # Output_matrix
         df = pd.read_csv(csv)
