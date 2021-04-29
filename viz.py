@@ -265,7 +265,7 @@ class VizUnprocessed:
         os.makedirs(savepath, exist_ok=True)
 
         plt.figure(figsize=(15, 12))
-        plt.imshow(clip_traces.T, cmap=plt.cm.seismic)
+        plt.imshow(clip_traces.T, cmap=plt.cm.seismic, aspect='auto')
         plt.savefig(f"{savepath}/"
                     f"{self.dataset_name}_clip_{self.clip}.png")
         plt.close()
