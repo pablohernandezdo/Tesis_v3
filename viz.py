@@ -338,7 +338,7 @@ class VizUnprocessed:
         df = pd.read_csv(csv)
 
         # Create matrix of output values as columns
-        extend = np.ones((len(df["out"]), 6000))
+        extend = np.ones((len(df["out"]), len(clip_traces[0])))
         output_matrix = df["out"].to_numpy().reshape(-1, 1) * extend
 
         savepath = f"Figures/Classification/Superimposed/" \
