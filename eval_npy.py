@@ -35,7 +35,7 @@ def main():
     args = parser.parse_args()
 
     # Select training device
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
 
     # Test dataset
     test_set = NpyDataset(args.test_path)
