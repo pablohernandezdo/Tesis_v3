@@ -45,7 +45,7 @@ class Trigger:
 
     def plot_trace(self, trace, idx):
 
-        savepath = f"Figures/STA-LTA-Triggers/{self.dataset_name}"
+        savepath = f"STA-LTA-Triggers/{self.dataset_name}"
 
         os.makedirs(savepath, exist_ok=True)
 
