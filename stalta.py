@@ -55,5 +55,5 @@ class Trigger:
         plt.xlabel('Samples')
         plt.ylabel('[-]')
         plt.grid(True)
-        plt.savefig(f"{savepath}/{self.dataset_name}/Trace_{idx}.png")
+        plt.savefig(f"{savepath}/Trace_{idx}.png")
         plt.close()
