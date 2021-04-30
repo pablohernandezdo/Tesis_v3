@@ -33,7 +33,6 @@ class Trigger:
             cft = classic_sta_lta(tr, int(5 * self.fs), int(10 * self.fs))
 
             if np.max(cft) > self.thresh:
-                print("Guardando traza")
                 self.plot_trace(tr, i)
                 trig = 1
 
