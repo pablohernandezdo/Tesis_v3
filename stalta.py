@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from obspy.signal.trigger import classic_sta_lta
 
@@ -29,6 +30,7 @@ class Trigger:
             cft = classic_sta_lta(tr, int(5 * self.fs), int(10 * self.fs))
 
             if np.max(cft) > self.thresh:
+                self.plot_trace(tr, i)
                 trig = 1
 
             df.loc[i] = [i, trig]
@@ -36,3 +38,19 @@ class Trigger:
         os.makedirs("STA-LTA-Triggers", exist_ok=True)
         df.to_csv(f"STA-LTA-Triggers/{self.dataset_name}_{self.thresh}.csv",
                   index=False)
+
+    def plot_trace(self, trace, idx):
+
+        savepath = f"Figures/STA-LTA-Triggers/{self.dataset_name}"
+
+        if not os.path.exists(savepath):
+            os.makedirs(savepath, exist_ok=True)
+
+        plt.figure(figsize=(20, 20))
+        plt.plot(trace)
+        plt.title(f'Dataset {self.dataset_name}, trace number {idx}')
+        plt.xlabel('Samples')
+        plt.ylabel('[-]')
+        plt.grid(True)
+        plt.savefig(f"{savepath}/{self.dataset_name}/Trace_{idx}.png")
+        plt.close()
