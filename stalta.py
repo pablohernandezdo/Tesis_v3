@@ -23,6 +23,9 @@ class Trigger:
 
     def save_triggers_csv(self):
 
+        # ARREGLAR PARA QUE SE GUARDE EN UNA CARPETA CUYO
+        # NOMBRE TENGA EL VALOR DEL TRIGGER
+
         df = pd.DataFrame(columns=["Trace number", "Trigger"])
 
         for i, tr in enumerate(self.dataset):
