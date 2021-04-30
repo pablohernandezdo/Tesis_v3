@@ -33,7 +33,7 @@ class Trigger:
             cft = classic_sta_lta(tr, int(5 * self.fs), int(10 * self.fs))
 
             if np.max(cft) > self.thresh:
-                self.plot_trace(tr, i)
+                # self.plot_trace(tr, i)
                 trig = 1
 
             df.loc[i] = [i, trig]
@@ -46,8 +46,7 @@ class Trigger:
 
         savepath = f"Figures/STA-LTA-Triggers/{self.dataset_name}"
 
-        if not os.path.exists(savepath):
-            os.makedirs(savepath, exist_ok=True)
+        os.makedirs(savepath, exist_ok=True)
 
         plt.figure(figsize=(20, 20))
         plt.plot(trace)
