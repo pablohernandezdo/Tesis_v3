@@ -19,13 +19,14 @@ class Trigger:
         # run sta lta en every trace
         self.fs = 100
 
-        self.save_triggers_csv()
+        self.save_triggers()
 
-    def save_triggers_csv(self):
+    def save_triggers(self):
 
         # ARREGLAR PARA QUE SE GUARDE EN UNA CARPETA CUYO
         # NOMBRE TENGA EL VALOR DEL TRIGGER
 
+        trig_traces = []
         df = pd.DataFrame(columns=["Trace number", "Trigger"])
 
         for i, tr in enumerate(self.dataset):
@@ -33,6 +34,7 @@ class Trigger:
             cft = classic_sta_lta(tr, int(5 * self.fs), int(10 * self.fs))
 
             if np.max(cft) > self.thresh:
+                trig_traces.append(tr)
                 self.plot_trace(tr, i)
                 trig = 1
 
@@ -41,6 +43,12 @@ class Trigger:
         os.makedirs("STA-LTA-Triggers", exist_ok=True)
         df.to_csv(f"STA-LTA-Triggers/{self.dataset_name}_{self.thresh}.csv",
                   index=False)
+
+        trig_traces = np.asarray(trig_traces)
+
+        os.makedirs("Data/Trigger", exist_ok=True)
+        np.save(f"Data/Trigger/{self.dataset_name}_{self.thresh}.npy",
+                trig_traces)
 
     def plot_trace(self, trace, idx):
 
