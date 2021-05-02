@@ -32,6 +32,7 @@ class Trigger:
         for i, tr in enumerate(self.dataset):
             trig = 0
             cft = classic_sta_lta(tr, int(5 * self.fs), int(10 * self.fs))
+            print(i)
 
             if np.max(cft) > self.thresh:
                 trig_traces.append(tr)
