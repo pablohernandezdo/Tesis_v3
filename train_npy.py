@@ -274,7 +274,7 @@ def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
-def get_classelifier(x):
+def get_classifier(x):
     if x == 'CNN_LSTM':
         return CNN_LSTM()
     elif x == 'Cnn1_6k':
