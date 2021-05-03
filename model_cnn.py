@@ -55,9 +55,8 @@ class CNN_LSTM(nn.Module):
         wave = self.bn8(F.relu(self.conv8(wave)))
         wave = self.p4(wave)
 
-        print(wave.shape)
         # View
-        wave = wave.view(32, 10, 100)
+        wave = wave.view(wave.shape[0], 10, 100)
 
         # BI LSTM
         wave, _ = self.bilstm(wave)
