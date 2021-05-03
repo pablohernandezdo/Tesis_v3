@@ -3,6 +3,72 @@ import torch.nn.functional as F
 
 # CNN TIPO 1 CON UNA CAPA LINEAL
 
+class CNN_LSTM(nn.Module):
+    def __init__(self):
+        super(CNN_LSTM, self).__init__()
+
+        self.conv1 = nn.Conv1d(1, 10, 3, padding=1, stride=1)
+        self.conv2 = nn.Conv1d(10, 50, 3, padding=1, stride=2)
+        self.conv3 = nn.Conv1d(50, 100, 3, padding=1, stride=1)
+        self.conv4 = nn.Conv1d(100, 200, 3, padding=1, stride=2)
+        self.conv5 = nn.Conv1d(200, 300, 3, padding=1, stride=1)
+        self.conv6 = nn.Conv1d(300, 500, 3, padding=1, stride=2)
+        self.conv7 = nn.Conv1d(500, 800, 3, padding=1, stride=1)
+        self.conv8 = nn.Conv1d(800, 1000, 3, padding=1, stride=2)
+        self.l1 = nn.Linear(1000, 1000)
+        self.l2 = nn.Linear(1000, 1)
+        self.p1 = nn.MaxPool1d(3)
+        self.p2 = nn.MaxPool1d(5)
+        self.p3 = nn.MaxPool1d(5)
+        self.p4 = nn.MaxPool1d(5)
+        self.bn1 = nn.BatchNorm1d(10)
+        self.bn2 = nn.BatchNorm1d(50)
+        self.bn3 = nn.BatchNorm1d(100)
+        self.bn4 = nn.BatchNorm1d(200)
+        self.bn5 = nn.BatchNorm1d(300)
+        self.bn6 = nn.BatchNorm1d(500)
+        self.bn7 = nn.BatchNorm1d(800)
+        self.bn8 = nn.BatchNorm1d(1000)
+
+        self.bilstm = nn.LSTM(100, 100, 2, batch_first=True)
+        self.lstm = nn.LSTM(100, 100, 1, batch_first=True)
+
+        self.l1 = nn.Linear(100, 1)
+
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, wave):
+        # VIEW
+        wave = wave.view(-1, 1, 6000)
+
+        # CNN
+        wave = self.bn1(F.relu(self.conv1(wave)))
+        wave = self.bn2(F.relu(self.conv2(wave)))
+        wave = self.p1(wave)
+        wave = self.bn3(F.relu(self.conv3(wave)))
+        wave = self.bn4(F.relu(self.conv4(wave)))
+        wave = self.p2(wave)
+        wave = self.bn5(F.relu(self.conv5(wave)))
+        wave = self.bn6(F.relu(self.conv6(wave)))
+        wave = self.p3(wave)
+        wave = self.bn7(F.relu(self.conv7(wave)))
+        wave = self.bn8(F.relu(self.conv8(wave)))
+        wave = self.p4(wave)
+
+        # View
+        wave = wave.view(32, 10, 100)
+
+        # BI LSTM
+        wave, _ = self.bilstm(wave)
+
+        # LSTM
+        wave, _ = self.lstm(wave)
+
+        # Linear
+        wave = self.l1(wave[:, -1, :])
+
+        return self.sigmoid(wave)
+
 
 class Cnn1_6k(nn.Module):
     def __init__(self):
