@@ -114,445 +114,447 @@ def evaluate_dataset(data_loader, dataset_name, device, net,
 
 
 def get_classifier(x):
-    if x == 'Cnn1_6k':
+    if x == 'CNN_LSTM':
+        return CNN_LSTM()
+    elif x == 'Cnn1_6k':
         return Cnn1_6k()
-    if x == 'Cnn1_5k':
+    elif x == 'Cnn1_5k':
         return Cnn1_5k()
-    if x == 'Cnn1_4k':
+    elif x == 'Cnn1_4k':
         return Cnn1_4k()
-    if x == 'Cnn1_3k':
+    elif x == 'Cnn1_3k':
         return Cnn1_3k()
-    if x == 'Cnn1_2k':
+    elif x == 'Cnn1_2k':
         return Cnn1_2k()
-    if x == 'Cnn1_1k':
+    elif x == 'Cnn1_1k':
         return Cnn1_1k()
-    if x == 'Cnn1_5h':
+    elif x == 'Cnn1_5h':
         return Cnn1_5h()
-    if x == 'Cnn1_2h':
+    elif x == 'Cnn1_2h':
         return Cnn1_2h()
-    if x == 'Cnn1_5h':
+    elif x == 'Cnn1_5h':
         return Cnn1_1h()
-    if x == 'Cnn1_10':
+    elif x == 'Cnn1_10':
         return Cnn1_10()
-    if x == 'Cnn1_6k_6k':
+    elif x == 'Cnn1_6k_6k':
         return Cnn1_6k_6k()
-    if x == 'Cnn1_6k_5k':
+    elif x == 'Cnn1_6k_5k':
         return Cnn1_6k_5k()
-    if x == 'Cnn1_6k_4k':
+    elif x == 'Cnn1_6k_4k':
         return Cnn1_6k_4k()
-    if x == 'Cnn1_6k_3k':
+    elif x == 'Cnn1_6k_3k':
         return Cnn1_6k_3k()
-    if x == 'Cnn1_6k_2k':
+    elif x == 'Cnn1_6k_2k':
         return Cnn1_6k_2k()
-    if x == 'Cnn1_6k_1k':
+    elif x == 'Cnn1_6k_1k':
         return Cnn1_6k_1k()
-    if x == 'Cnn1_6k_5h':
+    elif x == 'Cnn1_6k_5h':
         return Cnn1_6k_5h()
-    if x == 'Cnn1_6k_2h':
+    elif x == 'Cnn1_6k_2h':
         return Cnn1_6k_2h()
-    if x == 'Cnn1_6k_1h':
+    elif x == 'Cnn1_6k_1h':
         return Cnn1_6k_1h()
-    if x == 'Cnn1_6k_10':
+    elif x == 'Cnn1_6k_10':
         return Cnn1_6k_10()
-    if x == 'Cnn1_5k_6k':
+    elif x == 'Cnn1_5k_6k':
         return Cnn1_5k_6k()
-    if x == 'Cnn1_5k_5k':
+    elif x == 'Cnn1_5k_5k':
         return Cnn1_5k_5k()
-    if x == 'Cnn1_5k_4k':
+    elif x == 'Cnn1_5k_4k':
         return Cnn1_5k_4k()
-    if x == 'Cnn1_5k_3k':
+    elif x == 'Cnn1_5k_3k':
         return Cnn1_5k_3k()
-    if x == 'Cnn1_5k_2k':
+    elif x == 'Cnn1_5k_2k':
         return Cnn1_5k_2k()
-    if x == 'Cnn1_5k_1k':
+    elif x == 'Cnn1_5k_1k':
         return Cnn1_5k_1k()
-    if x == 'Cnn1_5k_5h':
+    elif x == 'Cnn1_5k_5h':
         return Cnn1_5k_5h()
-    if x == 'Cnn1_5k_2h':
+    elif x == 'Cnn1_5k_2h':
         return Cnn1_5k_2h()
-    if x == 'Cnn1_5k_1h':
+    elif x == 'Cnn1_5k_1h':
         return Cnn1_5k_1h()
-    if x == 'Cnn1_5k_10':
+    elif x == 'Cnn1_5k_10':
         return Cnn1_5k_10()
-    if x == 'Cnn1_4k_6k':
+    elif x == 'Cnn1_4k_6k':
         return Cnn1_4k_6k()
-    if x == 'Cnn1_4k_5k':
+    elif x == 'Cnn1_4k_5k':
         return Cnn1_4k_5k()
-    if x == 'Cnn1_4k_4k':
+    elif x == 'Cnn1_4k_4k':
         return Cnn1_4k_4k()
-    if x == 'Cnn1_4k_3k':
+    elif x == 'Cnn1_4k_3k':
         return Cnn1_4k_3k()
-    if x == 'Cnn1_4k_2k':
+    elif x == 'Cnn1_4k_2k':
         return Cnn1_4k_2k()
-    if x == 'Cnn1_4k_1k':
+    elif x == 'Cnn1_4k_1k':
         return Cnn1_4k_1k()
-    if x == 'Cnn1_4k_5h':
+    elif x == 'Cnn1_4k_5h':
         return Cnn1_4k_5h()
-    if x == 'Cnn1_4k_2h':
+    elif x == 'Cnn1_4k_2h':
         return Cnn1_4k_2h()
-    if x == 'Cnn1_4k_1h':
+    elif x == 'Cnn1_4k_1h':
         return Cnn1_4k_1h()
-    if x == 'Cnn1_4k_10':
+    elif x == 'Cnn1_4k_10':
         return Cnn1_4k_10()
-    if x == 'Cnn1_3k_6k':
+    elif x == 'Cnn1_3k_6k':
         return Cnn1_3k_6k()
-    if x == 'Cnn1_3k_5k':
+    elif x == 'Cnn1_3k_5k':
         return Cnn1_3k_5k()
-    if x == 'Cnn1_3k_4k':
+    elif x == 'Cnn1_3k_4k':
         return Cnn1_3k_4k()
-    if x == 'Cnn1_3k_3k':
+    elif x == 'Cnn1_3k_3k':
         return Cnn1_3k_3k()
-    if x == 'Cnn1_3k_2k':
+    elif x == 'Cnn1_3k_2k':
         return Cnn1_3k_2k()
-    if x == 'Cnn1_3k_1k':
+    elif x == 'Cnn1_3k_1k':
         return Cnn1_3k_1k()
-    if x == 'Cnn1_3k_5h':
+    elif x == 'Cnn1_3k_5h':
         return Cnn1_3k_5h()
-    if x == 'Cnn1_3k_2h':
+    elif x == 'Cnn1_3k_2h':
         return Cnn1_3k_2h()
-    if x == 'Cnn1_3k_1h':
+    elif x == 'Cnn1_3k_1h':
         return Cnn1_3k_1h()
-    if x == 'Cnn1_3k_10':
+    elif x == 'Cnn1_3k_10':
         return Cnn1_3k_10()
-    if x == 'Cnn1_2k_6k':
+    elif x == 'Cnn1_2k_6k':
         return Cnn1_2k_6k()
-    if x == 'Cnn1_2k_5k':
+    elif x == 'Cnn1_2k_5k':
         return Cnn1_2k_5k()
-    if x == 'Cnn1_2k_4k':
+    elif x == 'Cnn1_2k_4k':
         return Cnn1_2k_4k()
-    if x == 'Cnn1_2k_3k':
+    elif x == 'Cnn1_2k_3k':
         return Cnn1_2k_3k()
-    if x == 'Cnn1_2k_2k':
+    elif x == 'Cnn1_2k_2k':
         return Cnn1_2k_2k()
-    if x == 'Cnn1_2k_1k':
+    elif x == 'Cnn1_2k_1k':
         return Cnn1_2k_1k()
-    if x == 'Cnn1_2k_5h':
+    elif x == 'Cnn1_2k_5h':
         return Cnn1_2k_5h()
-    if x == 'Cnn1_2k_2h':
+    elif x == 'Cnn1_2k_2h':
         return Cnn1_2k_2h()
-    if x == 'Cnn1_2k_1h':
+    elif x == 'Cnn1_2k_1h':
         return Cnn1_2k_1h()
-    if x == 'Cnn1_2k_10':
+    elif x == 'Cnn1_2k_10':
         return Cnn1_2k_10()
-    if x == 'Cnn1_1k_6k':
+    elif x == 'Cnn1_1k_6k':
         return Cnn1_1k_6k()
-    if x == 'Cnn1_1k_5k':
+    elif x == 'Cnn1_1k_5k':
         return Cnn1_1k_5k()
-    if x == 'Cnn1_1k_4k':
+    elif x == 'Cnn1_1k_4k':
         return Cnn1_1k_4k()
-    if x == 'Cnn1_1k_3k':
+    elif x == 'Cnn1_1k_3k':
         return Cnn1_1k_3k()
-    if x == 'Cnn1_1k_2k':
+    elif x == 'Cnn1_1k_2k':
         return Cnn1_1k_2k()
-    if x == 'Cnn1_1k_1k':
+    elif x == 'Cnn1_1k_1k':
         return Cnn1_1k_1k()
-    if x == 'Cnn1_1k_5h':
+    elif x == 'Cnn1_1k_5h':
         return Cnn1_1k_5h()
-    if x == 'Cnn1_1k_2h':
+    elif x == 'Cnn1_1k_2h':
         return Cnn1_1k_2h()
-    if x == 'Cnn1_1k_1h':
+    elif x == 'Cnn1_1k_1h':
         return Cnn1_1k_1h()
-    if x == 'Cnn1_1k_10':
+    elif x == 'Cnn1_1k_10':
         return Cnn1_1k_10()
-    if x == 'Cnn1_5h_6k':
+    elif x == 'Cnn1_5h_6k':
         return Cnn1_5h_6k()
-    if x == 'Cnn1_5h_5k':
+    elif x == 'Cnn1_5h_5k':
         return Cnn1_5h_5k()
-    if x == 'Cnn1_5h_4k':
+    elif x == 'Cnn1_5h_4k':
         return Cnn1_5h_4k()
-    if x == 'Cnn1_5h_3k':
+    elif x == 'Cnn1_5h_3k':
         return Cnn1_5h_3k()
-    if x == 'Cnn1_5h_2k':
+    elif x == 'Cnn1_5h_2k':
         return Cnn1_5h_2k()
-    if x == 'Cnn1_5h_1k':
+    elif x == 'Cnn1_5h_1k':
         return Cnn1_5h_1k()
-    if x == 'Cnn1_5h_5h':
+    elif x == 'Cnn1_5h_5h':
         return Cnn1_5h_5h()
-    if x == 'Cnn1_5h_2h':
+    elif x == 'Cnn1_5h_2h':
         return Cnn1_5h_2h()
-    if x == 'Cnn1_5h_1h':
+    elif x == 'Cnn1_5h_1h':
         return Cnn1_5h_1h()
-    if x == 'Cnn1_5h_10':
+    elif x == 'Cnn1_5h_10':
         return Cnn1_5h_10()
-    if x == 'Cnn1_2h_6k':
+    elif x == 'Cnn1_2h_6k':
         return Cnn1_2h_6k()
-    if x == 'Cnn1_2h_5k':
+    elif x == 'Cnn1_2h_5k':
         return Cnn1_2h_5k()
-    if x == 'Cnn1_2h_4k':
+    elif x == 'Cnn1_2h_4k':
         return Cnn1_2h_4k()
-    if x == 'Cnn1_2h_3k':
+    elif x == 'Cnn1_2h_3k':
         return Cnn1_2h_3k()
-    if x == 'Cnn1_2h_2k':
+    elif x == 'Cnn1_2h_2k':
         return Cnn1_2h_2k()
-    if x == 'Cnn1_2h_1k':
+    elif x == 'Cnn1_2h_1k':
         return Cnn1_2h_1k()
-    if x == 'Cnn1_2h_5h':
+    elif x == 'Cnn1_2h_5h':
         return Cnn1_2h_5h()
-    if x == 'Cnn1_2h_2h':
+    elif x == 'Cnn1_2h_2h':
         return Cnn1_2h_2h()
-    if x == 'Cnn1_2h_1h':
+    elif x == 'Cnn1_2h_1h':
         return Cnn1_2h_1h()
-    if x == 'Cnn1_2h_10':
+    elif x == 'Cnn1_2h_10':
         return Cnn1_2h_10()
-    if x == 'Cnn1_1h_6k':
+    elif x == 'Cnn1_1h_6k':
         return Cnn1_1h_6k()
-    if x == 'Cnn1_1h_5k':
+    elif x == 'Cnn1_1h_5k':
         return Cnn1_1h_5k()
-    if x == 'Cnn1_1h_4k':
+    elif x == 'Cnn1_1h_4k':
         return Cnn1_1h_4k()
-    if x == 'Cnn1_1h_3k':
+    elif x == 'Cnn1_1h_3k':
         return Cnn1_1h_3k()
-    if x == 'Cnn1_1h_2k':
+    elif x == 'Cnn1_1h_2k':
         return Cnn1_1h_2k()
-    if x == 'Cnn1_1h_1k':
+    elif x == 'Cnn1_1h_1k':
         return Cnn1_1h_1k()
-    if x == 'Cnn1_1h_5h':
+    elif x == 'Cnn1_1h_5h':
         return Cnn1_1h_5h()
-    if x == 'Cnn1_1h_2h':
+    elif x == 'Cnn1_1h_2h':
         return Cnn1_1h_2h()
-    if x == 'Cnn1_1h_1h':
+    elif x == 'Cnn1_1h_1h':
         return Cnn1_1h_1h()
-    if x == 'Cnn1_1h_10':
+    elif x == 'Cnn1_1h_10':
         return Cnn1_1h_10()
-    if x == 'Cnn1_10_6k':
+    elif x == 'Cnn1_10_6k':
         return Cnn1_10_6k()
-    if x == 'Cnn1_10_5k':
+    elif x == 'Cnn1_10_5k':
         return Cnn1_10_5k()
-    if x == 'Cnn1_10_4k':
+    elif x == 'Cnn1_10_4k':
         return Cnn1_10_4k()
-    if x == 'Cnn1_10_3k':
+    elif x == 'Cnn1_10_3k':
         return Cnn1_10_3k()
-    if x == 'Cnn1_10_2k':
+    elif x == 'Cnn1_10_2k':
         return Cnn1_10_2k()
-    if x == 'Cnn1_10_1k':
+    elif x == 'Cnn1_10_1k':
         return Cnn1_10_1k()
-    if x == 'Cnn1_10_5h':
+    elif x == 'Cnn1_10_5h':
         return Cnn1_10_5h()
-    if x == 'Cnn1_10_2h':
+    elif x == 'Cnn1_10_2h':
         return Cnn1_10_2h()
-    if x == 'Cnn1_10_1h':
+    elif x == 'Cnn1_10_1h':
         return Cnn1_10_1h()
-    if x == 'Cnn1_10_10':
+    elif x == 'Cnn1_10_10':
         return Cnn1_10_10()
-    if x == 'Cnn2_6k':
+    elif x == 'Cnn2_6k':
         return Cnn2_6k()
-    if x == 'Cnn2_5k':
+    elif x == 'Cnn2_5k':
         return Cnn2_5k()
-    if x == 'Cnn2_4k':
+    elif x == 'Cnn2_4k':
         return Cnn2_4k()
-    if x == 'Cnn2_3k':
+    elif x == 'Cnn2_3k':
         return Cnn2_3k()
-    if x == 'Cnn2_2k':
+    elif x == 'Cnn2_2k':
         return Cnn2_2k()
-    if x == 'Cnn2_1k':
+    elif x == 'Cnn2_1k':
         return Cnn2_1k()
-    if x == 'Cnn2_5h':
+    elif x == 'Cnn2_5h':
         return Cnn2_5h()
-    if x == 'Cnn2_2h':
+    elif x == 'Cnn2_2h':
         return Cnn2_2h()
-    if x == 'Cnn2_5h':
+    elif x == 'Cnn2_5h':
         return Cnn2_1h()
-    if x == 'Cnn2_10':
+    elif x == 'Cnn2_10':
         return Cnn2_10()
-    if x == 'Cnn2_6k_6k':
+    elif x == 'Cnn2_6k_6k':
         return Cnn2_6k_6k()
-    if x == 'Cnn2_6k_5k':
+    elif x == 'Cnn2_6k_5k':
         return Cnn2_6k_5k()
-    if x == 'Cnn2_6k_4k':
+    elif x == 'Cnn2_6k_4k':
         return Cnn2_6k_4k()
-    if x == 'Cnn2_6k_3k':
+    elif x == 'Cnn2_6k_3k':
         return Cnn2_6k_3k()
-    if x == 'Cnn2_6k_2k':
+    elif x == 'Cnn2_6k_2k':
         return Cnn2_6k_2k()
-    if x == 'Cnn2_6k_1k':
+    elif x == 'Cnn2_6k_1k':
         return Cnn2_6k_1k()
-    if x == 'Cnn2_6k_5h':
+    elif x == 'Cnn2_6k_5h':
         return Cnn2_6k_5h()
-    if x == 'Cnn2_6k_2h':
+    elif x == 'Cnn2_6k_2h':
         return Cnn2_6k_2h()
-    if x == 'Cnn2_6k_1h':
+    elif x == 'Cnn2_6k_1h':
         return Cnn2_6k_1h()
-    if x == 'Cnn2_6k_10':
+    elif x == 'Cnn2_6k_10':
         return Cnn2_6k_10()
-    if x == 'Cnn2_5k_6k':
+    elif x == 'Cnn2_5k_6k':
         return Cnn2_5k_6k()
-    if x == 'Cnn2_5k_5k':
+    elif x == 'Cnn2_5k_5k':
         return Cnn2_5k_5k()
-    if x == 'Cnn2_5k_4k':
+    elif x == 'Cnn2_5k_4k':
         return Cnn2_5k_4k()
-    if x == 'Cnn2_5k_3k':
+    elif x == 'Cnn2_5k_3k':
         return Cnn2_5k_3k()
-    if x == 'Cnn2_5k_2k':
+    elif x == 'Cnn2_5k_2k':
         return Cnn2_5k_2k()
-    if x == 'Cnn2_5k_1k':
+    elif x == 'Cnn2_5k_1k':
         return Cnn2_5k_1k()
-    if x == 'Cnn2_5k_5h':
+    elif x == 'Cnn2_5k_5h':
         return Cnn2_5k_5h()
-    if x == 'Cnn2_5k_2h':
+    elif x == 'Cnn2_5k_2h':
         return Cnn2_5k_2h()
-    if x == 'Cnn2_5k_1h':
+    elif x == 'Cnn2_5k_1h':
         return Cnn2_5k_1h()
-    if x == 'Cnn2_5k_10':
+    elif x == 'Cnn2_5k_10':
         return Cnn2_5k_10()
-    if x == 'Cnn2_4k_6k':
+    elif x == 'Cnn2_4k_6k':
         return Cnn2_4k_6k()
-    if x == 'Cnn2_4k_5k':
+    elif x == 'Cnn2_4k_5k':
         return Cnn2_4k_5k()
-    if x == 'Cnn2_4k_4k':
+    elif x == 'Cnn2_4k_4k':
         return Cnn2_4k_4k()
-    if x == 'Cnn2_4k_3k':
+    elif x == 'Cnn2_4k_3k':
         return Cnn2_4k_3k()
-    if x == 'Cnn2_4k_2k':
+    elif x == 'Cnn2_4k_2k':
         return Cnn2_4k_2k()
-    if x == 'Cnn2_4k_1k':
+    elif x == 'Cnn2_4k_1k':
         return Cnn2_4k_1k()
-    if x == 'Cnn2_4k_5h':
+    elif x == 'Cnn2_4k_5h':
         return Cnn2_4k_5h()
-    if x == 'Cnn2_4k_2h':
+    elif x == 'Cnn2_4k_2h':
         return Cnn2_4k_2h()
-    if x == 'Cnn2_4k_1h':
+    elif x == 'Cnn2_4k_1h':
         return Cnn2_4k_1h()
-    if x == 'Cnn2_4k_10':
+    elif x == 'Cnn2_4k_10':
         return Cnn2_4k_10()
-    if x == 'Cnn2_3k_6k':
+    elif x == 'Cnn2_3k_6k':
         return Cnn2_3k_6k()
-    if x == 'Cnn2_3k_5k':
+    elif x == 'Cnn2_3k_5k':
         return Cnn2_3k_5k()
-    if x == 'Cnn2_3k_4k':
+    elif x == 'Cnn2_3k_4k':
         return Cnn2_3k_4k()
-    if x == 'Cnn2_3k_3k':
+    elif x == 'Cnn2_3k_3k':
         return Cnn2_3k_3k()
-    if x == 'Cnn2_3k_2k':
+    elif x == 'Cnn2_3k_2k':
         return Cnn2_3k_2k()
-    if x == 'Cnn2_3k_1k':
+    elif x == 'Cnn2_3k_1k':
         return Cnn2_3k_1k()
-    if x == 'Cnn2_3k_5h':
+    elif x == 'Cnn2_3k_5h':
         return Cnn2_3k_5h()
-    if x == 'Cnn2_3k_2h':
+    elif x == 'Cnn2_3k_2h':
         return Cnn2_3k_2h()
-    if x == 'Cnn2_3k_1h':
+    elif x == 'Cnn2_3k_1h':
         return Cnn2_3k_1h()
-    if x == 'Cnn2_3k_10':
+    elif x == 'Cnn2_3k_10':
         return Cnn2_3k_10()
-    if x == 'Cnn2_2k_6k':
+    elif x == 'Cnn2_2k_6k':
         return Cnn2_2k_6k()
-    if x == 'Cnn2_2k_5k':
+    elif x == 'Cnn2_2k_5k':
         return Cnn2_2k_5k()
-    if x == 'Cnn2_2k_4k':
+    elif x == 'Cnn2_2k_4k':
         return Cnn2_2k_4k()
-    if x == 'Cnn2_2k_3k':
+    elif x == 'Cnn2_2k_3k':
         return Cnn2_2k_3k()
-    if x == 'Cnn2_2k_2k':
+    elif x == 'Cnn2_2k_2k':
         return Cnn2_2k_2k()
-    if x == 'Cnn2_2k_1k':
+    elif x == 'Cnn2_2k_1k':
         return Cnn2_2k_1k()
-    if x == 'Cnn2_2k_5h':
+    elif x == 'Cnn2_2k_5h':
         return Cnn2_2k_5h()
-    if x == 'Cnn2_2k_2h':
+    elif x == 'Cnn2_2k_2h':
         return Cnn2_2k_2h()
-    if x == 'Cnn2_2k_1h':
+    elif x == 'Cnn2_2k_1h':
         return Cnn2_2k_1h()
-    if x == 'Cnn2_2k_10':
+    elif x == 'Cnn2_2k_10':
         return Cnn2_2k_10()
-    if x == 'Cnn2_1k_6k':
+    elif x == 'Cnn2_1k_6k':
         return Cnn2_1k_6k()
-    if x == 'Cnn2_1k_5k':
+    elif x == 'Cnn2_1k_5k':
         return Cnn2_1k_5k()
-    if x == 'Cnn2_1k_4k':
+    elif x == 'Cnn2_1k_4k':
         return Cnn2_1k_4k()
-    if x == 'Cnn2_1k_3k':
+    elif x == 'Cnn2_1k_3k':
         return Cnn2_1k_3k()
-    if x == 'Cnn2_1k_2k':
+    elif x == 'Cnn2_1k_2k':
         return Cnn2_1k_2k()
-    if x == 'Cnn2_1k_1k':
+    elif x == 'Cnn2_1k_1k':
         return Cnn2_1k_1k()
-    if x == 'Cnn2_1k_5h':
+    elif x == 'Cnn2_1k_5h':
         return Cnn2_1k_5h()
-    if x == 'Cnn2_1k_2h':
+    elif x == 'Cnn2_1k_2h':
         return Cnn2_1k_2h()
-    if x == 'Cnn2_1k_1h':
+    elif x == 'Cnn2_1k_1h':
         return Cnn2_1k_1h()
-    if x == 'Cnn2_1k_10':
+    elif x == 'Cnn2_1k_10':
         return Cnn2_1k_10()
-    if x == 'Cnn2_5h_6k':
+    elif x == 'Cnn2_5h_6k':
         return Cnn2_5h_6k()
-    if x == 'Cnn2_5h_5k':
+    elif x == 'Cnn2_5h_5k':
         return Cnn2_5h_5k()
-    if x == 'Cnn2_5h_4k':
+    elif x == 'Cnn2_5h_4k':
         return Cnn2_5h_4k()
-    if x == 'Cnn2_5h_3k':
+    elif x == 'Cnn2_5h_3k':
         return Cnn2_5h_3k()
-    if x == 'Cnn2_5h_2k':
+    elif x == 'Cnn2_5h_2k':
         return Cnn2_5h_2k()
-    if x == 'Cnn2_5h_1k':
+    elif x == 'Cnn2_5h_1k':
         return Cnn2_5h_1k()
-    if x == 'Cnn2_5h_5h':
+    elif x == 'Cnn2_5h_5h':
         return Cnn2_5h_5h()
-    if x == 'Cnn2_5h_2h':
+    elif x == 'Cnn2_5h_2h':
         return Cnn2_5h_2h()
-    if x == 'Cnn2_5h_1h':
+    elif x == 'Cnn2_5h_1h':
         return Cnn2_5h_1h()
-    if x == 'Cnn2_5h_10':
+    elif x == 'Cnn2_5h_10':
         return Cnn2_5h_10()
-    if x == 'Cnn2_2h_6k':
+    elif x == 'Cnn2_2h_6k':
         return Cnn2_2h_6k()
-    if x == 'Cnn2_2h_5k':
+    elif x == 'Cnn2_2h_5k':
         return Cnn2_2h_5k()
-    if x == 'Cnn2_2h_4k':
+    elif x == 'Cnn2_2h_4k':
         return Cnn2_2h_4k()
-    if x == 'Cnn2_2h_3k':
+    elif x == 'Cnn2_2h_3k':
         return Cnn2_2h_3k()
-    if x == 'Cnn2_2h_2k':
+    elif x == 'Cnn2_2h_2k':
         return Cnn2_2h_2k()
-    if x == 'Cnn2_2h_1k':
+    elif x == 'Cnn2_2h_1k':
         return Cnn2_2h_1k()
-    if x == 'Cnn2_2h_5h':
+    elif x == 'Cnn2_2h_5h':
         return Cnn2_2h_5h()
-    if x == 'Cnn2_2h_2h':
+    elif x == 'Cnn2_2h_2h':
         return Cnn2_2h_2h()
-    if x == 'Cnn2_2h_1h':
+    elif x == 'Cnn2_2h_1h':
         return Cnn2_2h_1h()
-    if x == 'Cnn2_2h_10':
+    elif x == 'Cnn2_2h_10':
         return Cnn2_2h_10()
-    if x == 'Cnn2_1h_6k':
+    elif x == 'Cnn2_1h_6k':
         return Cnn2_1h_6k()
-    if x == 'Cnn2_1h_5k':
+    elif x == 'Cnn2_1h_5k':
         return Cnn2_1h_5k()
-    if x == 'Cnn2_1h_4k':
+    elif x == 'Cnn2_1h_4k':
         return Cnn2_1h_4k()
-    if x == 'Cnn2_1h_3k':
+    elif x == 'Cnn2_1h_3k':
         return Cnn2_1h_3k()
-    if x == 'Cnn2_1h_2k':
+    elif x == 'Cnn2_1h_2k':
         return Cnn2_1h_2k()
-    if x == 'Cnn2_1h_1k':
+    elif x == 'Cnn2_1h_1k':
         return Cnn2_1h_1k()
-    if x == 'Cnn2_1h_5h':
+    elif x == 'Cnn2_1h_5h':
         return Cnn2_1h_5h()
-    if x == 'Cnn2_1h_2h':
+    elif x == 'Cnn2_1h_2h':
         return Cnn2_1h_2h()
-    if x == 'Cnn2_1h_1h':
+    elif x == 'Cnn2_1h_1h':
         return Cnn2_1h_1h()
-    if x == 'Cnn2_1h_10':
+    elif x == 'Cnn2_1h_10':
         return Cnn2_1h_10()
-    if x == 'Cnn2_10_6k':
+    elif x == 'Cnn2_10_6k':
         return Cnn2_10_6k()
-    if x == 'Cnn2_10_5k':
+    elif x == 'Cnn2_10_5k':
         return Cnn2_10_5k()
-    if x == 'Cnn2_10_4k':
+    elif x == 'Cnn2_10_4k':
         return Cnn2_10_4k()
-    if x == 'Cnn2_10_3k':
+    elif x == 'Cnn2_10_3k':
         return Cnn2_10_3k()
-    if x == 'Cnn2_10_2k':
+    elif x == 'Cnn2_10_2k':
         return Cnn2_10_2k()
-    if x == 'Cnn2_10_1k':
+    elif x == 'Cnn2_10_1k':
         return Cnn2_10_1k()
-    if x == 'Cnn2_10_5h':
+    elif x == 'Cnn2_10_5h':
         return Cnn2_10_5h()
-    if x == 'Cnn2_10_2h':
+    elif x == 'Cnn2_10_2h':
         return Cnn2_10_2h()
-    if x == 'Cnn2_10_1h':
+    elif x == 'Cnn2_10_1h':
         return Cnn2_10_1h()
-    if x == 'Cnn2_10_10':
+    elif x == 'Cnn2_10_10':
         return Cnn2_10_10()
     else:
         return Cnn2_10_10()
