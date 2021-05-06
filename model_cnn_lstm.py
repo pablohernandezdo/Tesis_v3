@@ -59,3 +59,6 @@ class CNN_LSTM(nn.Module):
         out_l1 = self.l1(out_lstm)
 
         return self.sigmoid(out_l1)
+
+
+class ResCnnLstm(nn.Module):
