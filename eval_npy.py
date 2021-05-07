@@ -558,8 +558,6 @@ def get_classifier(x):
         return Cnn2_10_1h()
     elif x == 'Cnn2_10_10':
         return Cnn2_10_10()
-    else:
-        return Cnn2_10_10()
 
 
 if __name__ == "__main__":
