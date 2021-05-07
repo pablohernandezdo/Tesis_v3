@@ -114,7 +114,9 @@ def evaluate_dataset(data_loader, dataset_name, device, net,
 
 
 def get_classifier(x):
-    if x == 'CNN_LSTM':
+    if x == 'CRED':
+        return CRED()
+    elif x == 'CNN_LSTM':
         return CNN_LSTM()
     elif x == 'Cnn1_6k':
         return Cnn1_6k()

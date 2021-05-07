@@ -275,7 +275,9 @@ def count_parameters(model):
 
 
 def get_classifier(x):
-    if x == 'CNN_LSTM':
+    if x == 'CRED':
+        return CRED()
+    elif x == 'CNN_LSTM':
         return CNN_LSTM()
     elif x == 'Cnn1_6k':
         return Cnn1_6k()
