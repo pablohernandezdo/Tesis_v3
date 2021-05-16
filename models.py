@@ -2,6 +2,22 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
+class ANN(nn.Module):
+    def __init__(self):
+        super(ANN, self).__init__()
+
+        self.l1 = nn.Linear(6000, 2000)
+        self.l2 = nn.Linear(2000, 2000)
+        self.l3 = nn.Linear(2000, 1)
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, wave):
+        wave = F.relu(self.l1(wave))
+        wave = F.relu(self.l2(wave))
+        wave = self.l3(wave)
+        return self.sigmoid(wave)
+
+
 class CNN(nn.Module):
     def __init__(self):
         super(CNN, self).__init__()
@@ -47,22 +63,6 @@ class CNN(nn.Module):
         wave = wave.squeeze()
         wave = F.relu(self.l1(wave))
         wave = self.l2(wave)
-        return self.sigmoid(wave)
-
-
-class ANN(nn.Module):
-    def __init__(self):
-        super(ANN, self).__init__()
-
-        self.l1 = nn.Linear(6000, 2000)
-        self.l2 = nn.Linear(2000, 2000)
-        self.l3 = nn.Linear(2000, 1)
-        self.sigmoid = nn.Sigmoid()
-
-    def forward(self, wave):
-        wave = F.relu(self.l1(wave))
-        wave = F.relu(self.l2(wave))
-        wave = self.l3(wave)
         return self.sigmoid(wave)
 
 
