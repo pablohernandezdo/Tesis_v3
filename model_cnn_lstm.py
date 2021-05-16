@@ -1,7 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 class CNN_LSTM(nn.Module):
     def __init__(self):
         super(CNN_LSTM, self).__init__()
