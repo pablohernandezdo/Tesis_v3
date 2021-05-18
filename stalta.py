@@ -11,7 +11,7 @@ class Trigger:
 
         self.dataset_path = dataset_path
         self.dataset_name = self.dataset_path.split("/")[-1].split(".")[0]
-        self.thresh = thgresh
+        self.thresh = thresh
 
         # load dataset
         self.dataset = np.load(self.dataset_path)
