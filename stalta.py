@@ -11,7 +11,7 @@ class Trigger:
 
         self.dataset_path = dataset_path
         self.dataset_name = self.dataset_path.split("/")[-1].split(".")[0]
-        self.thresh = thresh
+        self.thresh = thgresh
 
         # load dataset
         self.dataset = np.load(self.dataset_path)
@@ -19,7 +19,7 @@ class Trigger:
         # run sta lta en every trace
         self.fs = 100
 
-        self.save_triggers()
+        self.cfts = self.save_triggers()
 
     def save_triggers(self):
 
@@ -27,11 +27,13 @@ class Trigger:
         # NOMBRE TENGA EL VALOR DEL TRIGGER
 
         trig_traces = []
+        cfts = []
         df = pd.DataFrame(columns=["Trace number", "Trigger"])
 
         for i, tr in enumerate(self.dataset):
             trig = 0
             cft = classic_sta_lta(tr, int(5 * self.fs), int(10 * self.fs))
+            cfts.append(cft)
             print(i)
 
             if np.max(cft) > self.thresh:
@@ -50,6 +52,8 @@ class Trigger:
         os.makedirs("Data/Trigger", exist_ok=True)
         np.save(f"Data/Trigger/{self.dataset_name}_{self.thresh}.npy",
                 trig_traces)
+
+        return np.asarray(cfts)
 
     def plot_trace(self, trace, idx):
 
