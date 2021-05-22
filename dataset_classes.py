@@ -153,7 +153,8 @@ class DatasetNevada(Dsets):
 
             # generar ruido y padd
             ns = rng.normal(0, np.amin(stds) / 2, n_padd)
-            trace = np.hstack([trace, ns])
+            # trace = np.hstack([trace, ns])
+            trace = np.hstack([ns, trace])
             padd_traces.append(trace)
 
         return np.asarray(padd_traces)
