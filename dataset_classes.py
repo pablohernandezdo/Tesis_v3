@@ -52,7 +52,7 @@ class Dsets:
 
         for trace in traces:
             if np.amax(np.abs(trace)):
-                trace /=  np.amax(np.abs(trace))
+                trace /= np.amax(np.abs(trace))
 
             norm_traces.append(trace)
 
@@ -181,7 +181,17 @@ class DatasetBelgica(Dsets):
             tr = tr.reshape(-1, 6000)
             noise_traces = np.vstack([noise_traces, tr])
 
-        self.traces = noise_traces
+        for i, tr in enumerate(noise_traces):
+            # Detrending
+            tr = detrend(tr)
+
+            # Media cero
+            tr = tr - np.mean(tr)
+
+            noise_traces[i] = tr
+
+        print("Normalizing dataset")
+        self.traces = self.normalize(noise_traces)
 
         print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Belgica.npy'):
