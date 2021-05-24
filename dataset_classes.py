@@ -161,14 +161,31 @@ class DatasetNevada(Dsets):
 
 
 class DatasetBelgica(Dsets):
-    def __init__(self, dataset_path, savepath, unproc_savepath):
+    def __init__(self, dataset_path, savepath):
         super(DatasetBelgica, self).__init__()
 
         self.dataset_path = dataset_path
         self.savepath = savepath
-        self.unproc_savepath = unproc_savepath
+        self.fs = 10
+        self.n_traces = 7000
 
-        # Belgica lo voy a dejar para el final, mucho webeo entremedio
+        # Dataset de ruido, no es necesario preprocesar
+        print(f"Reading dataset from path: {self.dataset_path}")
+        self.traces = sio.loadmat(self.dataset_path)["Data_2D"]
+
+        print(f"Rearranging dataset traces 400-1400")
+        # Empty np array for vstacking
+        noise_traces = np.empty((0, 6000))
+
+        for tr in self.traces[400:1400]:
+            tr = tr.reshape(-1, 6000)
+            noise_traces = np.vstack([noise_traces, tr])
+
+        self.traces = noise_traces
+
+        print(f"Saving npy format dataset in {self.savepath}")
+        if not os.path.exists(f'{self.savepath}/Belgica.npy'):
+            self.save_dataset(self.traces, self.savepath, 'Belgica')
 
 
 class DatasetReykjanes(Dsets):
