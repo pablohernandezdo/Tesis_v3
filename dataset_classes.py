@@ -177,7 +177,9 @@ class DatasetBelgica(Dsets):
         # Empty np array for vstacking
         noise_traces = np.empty((0, 6000))
 
-        for tr in self.traces[400:1400]:
+        selected = np.vstack([self.traces[400:1000], self.traces[1200:1600]])
+
+        for tr in selected:
             tr = tr.reshape(-1, 6000)
             noise_traces = np.vstack([noise_traces, tr])
 
