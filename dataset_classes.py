@@ -181,17 +181,21 @@ class DatasetBelgica(Dsets):
             tr = tr.reshape(-1, 6000)
             noise_traces = np.vstack([noise_traces, tr])
 
-        for i, tr in enumerate(noise_traces):
+        new_traces = []
+
+        for tr in noise_traces:
             # Detrending
             tr = detrend(tr)
 
             # Media cero
             tr = tr - np.mean(tr)
 
-            noise_traces[i] = tr
+            new_traces.append(tr)
+
+        self.traces = np.asarray(new_traces)
 
         print("Normalizing dataset")
-        self.traces = self.normalize(noise_traces)
+        self.traces = self.normalize(self.traces)
 
         print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Belgica.npy'):
