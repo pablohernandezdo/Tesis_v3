@@ -8,6 +8,7 @@ from numpy.random import default_rng
 
 from obspy.io.seg2 import seg2
 from obspy.io.segy.core import _read_segy
+from obspy.signal.trigger import classic_sta_lta
 
 from scipy import signal
 from scipy.signal import butter, lfilter, detrend
@@ -173,35 +174,41 @@ class DatasetBelgica(Dsets):
         print(f"Reading dataset from path: {self.dataset_path}")
         self.traces = sio.loadmat(self.dataset_path)["Data_2D"]
 
-        print(f"Rearranging dataset traces 400-1400")
-        # Empty np array for vstacking
-        noise_traces = np.empty((0, 6000))
+        self.noise_traces = np.empty((0, 6000))
 
-        selected = np.vstack([self.traces[400:1000], self.traces[1200:1600]])
+        # ventanas en tiempo
+        sta_t = 2
+        lta_t = 20
 
-        for tr in selected:
-            tr = tr.reshape(-1, 6000)
-            noise_traces = np.vstack([noise_traces, tr])
+        # ventanas en muestras
+        sta_n = sta_t * self.fs * 10
+        lta_n = lta_t * self.fs * 10
 
-        new_traces = []
+        copied = 0
 
-        for tr in noise_traces:
-            # Detrending
-            tr = detrend(tr)
+        for trace in self.traces:
+            trace = trace.reshape(-1, 6000)
 
-            # Media cero
-            tr = tr - np.mean(tr)
+            for tr in trace:
+                tr = detrend(tr)
+                tr = tr - np.mean(tr)
+                tr /= np.amax(tr)
 
-            new_traces.append(tr)
+                cft = classic_sta_lta(tr, sta_n, lta_n)
 
-        self.traces = np.asarray(new_traces)
+                if np.amax(cft) < 2.5:
+                    self.noise_traces = np.vstack([self.noise_traces, tr])
+                    copied += 1
 
-        print("Normalizing dataset")
-        self.traces = self.normalize(self.traces)
+                if copied == self.n_traces:
+                    break
+
+            if copied == self.n_traces:
+                break
 
         print(f"Saving npy format dataset in {self.savepath}")
         if not os.path.exists(f'{self.savepath}/Belgica.npy'):
-            self.save_dataset(self.traces, self.savepath, 'Belgica')
+            self.save_dataset(self.noise_traces, self.savepath, 'Belgica')
 
 
 class DatasetReykjanes(Dsets):
