@@ -177,8 +177,8 @@ class DatasetBelgica(Dsets):
         self.noise_traces = np.empty((0, 6000))
 
         # ventanas en tiempo
-        sta_t = 2
-        lta_t = 20
+        sta_t = 3
+        lta_t = 25
 
         # ventanas en muestras
         sta_n = sta_t * self.fs * 10
