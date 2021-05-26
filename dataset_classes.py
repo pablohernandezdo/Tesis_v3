@@ -22,6 +22,9 @@ class Dsets:
 
         for trace in traces:
 
+            if np.sum(np.abs(trace)) == 0:
+                continue
+                
             if fs / 2 < 50:
                 # Filter 50 Hz
                 trace = self.butter_lowpass_filter(trace, 50, fs)
