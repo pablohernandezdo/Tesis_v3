@@ -119,6 +119,10 @@ def get_classifier(x):
         return CRED()
     elif x == 'ANN':
         return ANN()
+    elif x == 'ANN1':
+        return ANN1()
+    elif x == 'ANN2':
+        return ANN2()
     elif x == 'CNN':
         return CNN()
 
